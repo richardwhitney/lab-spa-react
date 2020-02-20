@@ -1,13 +1,28 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
-
+import jwtDecode from 'jwt-decode';
+// Pages
 import welcome from './pages/welcome';
 import login from './pages/login';
 import signup from './pages/signup';
 import home from './pages/home';
+// Components
+import Navbar from './components/Navbar';
+import AuthRoute from './utils/AuthRoute';
 
-import Navbar from "./components/Navbar";
+let authenticated;
+const token = localStorage.FBIdToken;
+if (token) {
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);
+  if (decodedToken.exp * 1000 < Date.now()) {
+    window.location.href = '/login';
+    authenticated = false;
+  } else {
+    authenticated = true;
+  }
+}
 
 class App extends Component {
   render() {
@@ -17,9 +32,18 @@ class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact path="/" component={welcome}/>
-            <Route exact path="/login" component={login}/>
-            <Route exact path="/signup" component={signup}/>
-            <Route exact path="/home" component={home}/>
+            <AuthRoute exact path="/login"
+                       component={login}
+                       authenticated={authenticated}
+            />
+            <AuthRoute exact path="/signup"
+                       component={signup}
+                       authenticated={authenticated}
+            />
+            <Route exact path="/home"
+                       component={home}
+                       authenticated={authenticated}
+            />
           </Switch>
         </Router>
       </div>

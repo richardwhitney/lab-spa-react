@@ -1,7 +1,11 @@
 import React, {Component} from "react";
 import {Button, Form, Grid, Header, Segment, Label, Message } from "semantic-ui-react";
-import axios from 'axios';
 import {Link} from "react-router-dom";
+
+// Redux
+import {connect} from 'react-redux';
+import {signupUser} from "../redux/actions/userActions";
+import PropTypes from 'prop-types';
 
 class Signup extends Component{
 
@@ -12,39 +16,29 @@ class Signup extends Component{
       password: '',
       confirmPassword: '',
       userHandle: '',
-      loading: false,
       errors: {}
     }
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.UI.errors) {
+      return { errors: props.UI.errors };
+    }
+    return null;
+  }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
       loading: true
     });
-    const userData = {
+    const newUserData = {
       email: this.state.email,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       handle: this.state.userHandle
     };
-    console.log(userData);
-    axios.post('/signup', userData)
-      .then(result => {
-        console.log(result.data);
-        localStorage.setItem('FBIdToken', `Bearer ${result.data.token}`);
-        this.setState({
-          loading: false
-        });
-        this.props.history.push('/home');
-      })
-      .catch(error => {
-        this.setState({
-          errors: error.response.data,
-          loading: false
-        })
-        console.log(error.response.data);
-      });
+    this.props.signupUser(newUserData, this.props.history)
   };
 
   handleChange = (event, result) => {
@@ -55,7 +49,8 @@ class Signup extends Component{
   };
 
   render() {
-    const {errors, loading} = this.state;
+    const { UI: {loading} } = this.props;
+    const {errors} = this.state;
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -123,4 +118,15 @@ class Signup extends Component{
   }
 }
 
-export default Signup
+Signup.propTypes = {
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI
+});
+
+export default connect(mapStateToProps, {signupUser})(Signup)

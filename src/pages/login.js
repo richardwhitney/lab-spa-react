@@ -1,7 +1,12 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import {Button, Form, Grid, Header, Segment, Label, Message } from "semantic-ui-react";
-import axios from 'axios';
+
 import {Link} from "react-router-dom";
+
+// Redux
+import {connect} from 'react-redux';
+import {loginUser} from "../redux/actions/userActions";
 
 class Login extends Component{
 
@@ -10,36 +15,24 @@ class Login extends Component{
     this.state = {
       email: '',
       password: '',
-      loading: false,
       errors: {}
     }
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.UI.errors) {
+      return { errors: props.UI.errors };
+    }
+    return null;
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({
-      loading: true
-    });
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post('/login', userData)
-      .then(result => {
-        console.log(result.data);
-        localStorage.setItem('FBIdToken', `Bearer ${result.data.token}`);
-        this.setState({
-          loading: false
-        });
-        this.props.history.push('/home');
-      })
-      .catch(error => {
-        this.setState({
-          errors: error.response.data,
-          loading: false
-        })
-        console.log(error.response.data);
-      });
+    this.props.loginUser(userData, this.props.history);
   };
 
   handleChange = (event, result) => {
@@ -50,7 +43,8 @@ class Login extends Component{
   };
 
   render() {
-    const {errors, loading} = this.state;
+    const {UI: {loading}} = this.props;
+    const {errors} = this.state;
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -85,6 +79,7 @@ class Login extends Component{
               <Button color='blue' fluid size='large'>
                 Login
               </Button>
+              {errors.general && <Label pointing color='red'>{errors.general}</Label> }
             </Segment>
           </Form>
           <Message>
@@ -96,4 +91,19 @@ class Login extends Component{
   }
 }
 
-export default Login
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI
+});
+
+const mapActionsToProps = {
+  loginUser
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);

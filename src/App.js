@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
 import jwtDecode from 'jwt-decode';
+// Redux
+import {Provider} from 'react-redux';
+import store from "./redux/store";
 // Pages
 import welcome from './pages/welcome';
 import login from './pages/login';
@@ -27,7 +30,7 @@ if (token) {
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
         <Router>
           <Navbar/>
           <Switch>
@@ -41,12 +44,12 @@ class App extends Component {
                        authenticated={authenticated}
             />
             <Route exact path="/home"
-                       component={home}
-                       authenticated={authenticated}
+                   component={home}
+                   authenticated={authenticated}
             />
           </Switch>
         </Router>
-      </div>
+      </Provider>
     );
   }
 }

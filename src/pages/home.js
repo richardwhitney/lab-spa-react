@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {Grid, Card, Loader, Dimmer} from "semantic-ui-react";
-import axios from 'axios';
 
 import Test from '../components/Test';
 
 import {connect} from 'react-redux';
 import {getTests} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
+import AddTest from "../components/AddTest";
 
 class Home extends Component{
 
@@ -17,7 +17,9 @@ class Home extends Component{
   render() {
     const {tests, loading} = this.props.data;
     let testList = !loading ? (
-      tests.map((test) => <Test key={test.testId} test={test}/>)
+      tests.map((test) =>
+        <Test key={test.testId} test={test}/>
+      )
     ) : (
       <Dimmer active inverted>
         <Loader size='large'/>
@@ -31,7 +33,7 @@ class Home extends Component{
           </Card.Group>
         </Grid.Column>
         <Grid.Column width={10}>
-          Add Test
+          <AddTest />
         </Grid.Column>
       </Grid>
     )

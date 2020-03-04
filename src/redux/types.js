@@ -13,3 +13,5 @@ export const LOADING_DATA = 'LOADING_DATA';
 // Data reducer types
 export const SET_TESTS = 'SET_TESTS';
 export const SET_TEST = 'SET_TEST';
+export const DELETE_TEST = 'DELETE_TEST';
+export const ADD_TEST = 'ADD_TEST';

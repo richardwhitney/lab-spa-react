@@ -17,6 +17,7 @@ import AuthRoute from './utils/AuthRoute';
 // Redux
 import {SET_AUTHENTICATED} from "./redux/types";
 import {logoutUser} from "./redux/actions/userActions";
+import TestDetail from "./pages/testDetail";
 
 const token = localStorage.FBIdToken;
 if (token) {
@@ -48,6 +49,9 @@ class App extends Component {
             />
             <Route exact path="/home"
                    component={home}
+            />
+            <Route path="/tests/:testId"
+                   component={TestDetail}
             />
           </Switch>
         </Router>

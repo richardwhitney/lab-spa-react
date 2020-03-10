@@ -1,4 +1,4 @@
-import {SET_TESTS, LOADING_DATA, ADD_TEST} from "../types";
+import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST} from "../types";
 
 const initialState = {
   tests: [],
@@ -26,6 +26,12 @@ export default function (state = initialState, action) {
           action.payload,
           ...state.tests
         ]
+      };
+    case SET_TEST:
+      return {
+        ...state,
+        test: action.payload,
+        loading: false
       };
     default:
       return state;

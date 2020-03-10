@@ -1,5 +1,6 @@
-import {SET_TESTS, LOADING_DATA, LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST} from '../types';
+import {SET_TESTS, LOADING_DATA, LOADING_UI, STOP_LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST, SET_TEST} from '../types';
 import axios from 'axios';
+import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
 // Get all tests
 export const getTests = () => dispatch => {
@@ -34,6 +35,19 @@ export const addTest = (newTest) => (dispatch) => {
       dispatch({
         type: SET_ERRORS,
         payload: error.response.data
-      })
+      });
+    });
+};
+
+export const getTest = (testId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/tests/${testId}`)
+    .then(response => {
+      dispatch({
+        type: SET_TEST,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
     })
+    .catch(error => console.log());
 };

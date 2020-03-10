@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import {Segment, Dimmer, Loader, Header} from "semantic-ui-react";
+import {Segment, Dimmer, Loader, Header, Button, Container} from "semantic-ui-react";
 //Redux
 import { connect } from 'react-redux';
-import { getTest } from "../redux/actions/dataActions";
+import { getTest, deleteTest } from "../redux/actions/dataActions";
 
 class TestDetail extends Component {
 
@@ -11,10 +11,15 @@ class TestDetail extends Component {
     this.props.getTest(this.props.testId);
   }
 
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.props.deleteTest(this.props.testId, this.props.history);
+  }
+
   render() {
     const {test: {name, description, referenceRange, requestForm, specialNotes, specimenTypeVolume, turnaroundTime}, UI: {loading}} = this.props ;
     let testData = !loading ? (
-      <Segment>
+      <Segment raised clearing>
         <Header as='h3'>Name</Header>
         <p>{name}</p>
         <Header as='h3'>Description</Header>
@@ -29,6 +34,9 @@ class TestDetail extends Component {
         <p>{specimenTypeVolume}</p>
         <Header as='h3'>Turnaround Time</Header>
         <p>{turnaroundTime}</p>
+        <Container>
+          <Button color="red" floated="right" onClick={this.handleDelete}>Delete</Button>
+        </Container>
       </Segment>
     ) : (
       <Dimmer active inverted>
@@ -43,6 +51,7 @@ class TestDetail extends Component {
 
 TestDetail.propTypes = {
   getTest: PropTypes.func.isRequired,
+  deleteTest: PropTypes.func.isRequired,
   testId: PropTypes.string.isRequired,
   test: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
@@ -55,7 +64,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapActionsToProps = {
-  getTest
+  getTest,
+  deleteTest
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(TestDetail);

@@ -1,4 +1,4 @@
-import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST} from "../types";
+import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST} from "../types";
 
 const initialState = {
   tests: [],
@@ -32,6 +32,12 @@ export default function (state = initialState, action) {
         ...state,
         test: action.payload,
         loading: false
+      };
+    case DELETE_TEST:
+      let index = state.tests.findIndex(test => test.testId === action.payload);
+      state.tests.splice(index, 1);
+      return {
+        ...state
       };
     default:
       return state;

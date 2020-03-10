@@ -1,7 +1,7 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Form, Button, Segment, Header, TextArea, Label} from "semantic-ui-react";
+import {Form, Button, Segment, Header, TextArea, Label, Container} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 import {addTest} from "../redux/actions/dataActions";
@@ -55,7 +55,7 @@ class AddTest extends Component {
       <Form size='large'
             loading={!!loading}
             onSubmit={this.handleSubmit}>
-        <Segment stacked>
+        <Segment stacked clearing>
           <Header as='h3'>Add Test</Header>
           <Form.Input fluid
                       placeholder='Test name'
@@ -113,9 +113,11 @@ class AddTest extends Component {
                       error={!!errors.turnaroundTime}
           />
           {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
-          <Button color='blue' fluid size='large'>
-            Add Test
-          </Button>
+          <Container>
+            <Button color='blue' size='large'>
+              Add Test
+            </Button>
+          </Container>
           {errors.general && <Label pointing color='red'>{errors.general}</Label>}
         </Segment>
       </Form>

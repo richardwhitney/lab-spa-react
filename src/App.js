@@ -19,6 +19,8 @@ import {SET_AUTHENTICATED} from "./redux/types";
 import {logoutUser} from "./redux/actions/userActions";
 import TestDetail from "./pages/testDetail";
 
+axios.defaults.baseURL = 'https://europe-west1-lab-fyp-rw.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);

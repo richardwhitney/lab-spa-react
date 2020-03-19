@@ -19,7 +19,7 @@ class TestDetail extends Component {
   render() {
     const {test: {name, description, referenceRange, requestForm, specialNotes, specimenTypeVolume, turnaroundTime}, UI: {loading}} = this.props ;
     let testData = !loading ? (
-      <Segment raised clearing>
+      <Segment raised clearing style={{ marginTop: '7em'}}>
         <Header as='h3'>Name</Header>
         <p>{name}</p>
         <Header as='h3'>Description</Header>
@@ -39,7 +39,7 @@ class TestDetail extends Component {
         </Container>
       </Segment>
     ) : (
-      <Dimmer active inverted>
+      <Dimmer active inverted style={{ marginTop: '7em'}}>
         <Loader size='large'/>
       </Dimmer>
     );

@@ -26,7 +26,7 @@ class Home extends Component{
       </Dimmer>
     );
     return (
-      <Grid columns={2} padded>
+      <Grid columns={2} padded style={{ marginTop: '7em'}}>
         <Grid.Column width={6}>
           <Card.Group centered>
             {testList}

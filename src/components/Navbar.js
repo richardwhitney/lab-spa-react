@@ -16,7 +16,7 @@ class Navbar extends Component {
   render() {
     const { authenticated} = this.props;
     return (
-      <Menu inverted>
+      <Menu fixed='top' inverted>
         {authenticated ? (
           <Menu.Menu position="right">
             <Menu.Item name="Logout" onClick={this.handleLogout}>

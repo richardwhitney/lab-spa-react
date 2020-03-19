@@ -46,7 +46,7 @@ class Login extends Component{
     const {UI: {loading}} = this.props;
     const {errors} = this.state;
     return (
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle' style={{ marginTop: '7em'}}>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h2' textAlign='center'>
             Login

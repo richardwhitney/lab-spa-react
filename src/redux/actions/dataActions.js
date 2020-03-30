@@ -52,11 +52,26 @@ export const getTest = (testId) => dispatch => {
     .catch(error => console.log());
 };
 
+export const editTest = (updatedTest, testId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.put(`test/${testId}`, updatedTest)
+    .then(() => {
+      dispatch(getTest(testId));
+    })
+    .catch(error => console.log(error));
+};
+
 export const deleteTest = (testId, history) => dispatch => {
+  dispatch({ type: LOADING_UI});
   axios.delete(`/test/${testId}`)
     .then(() => {
       dispatch({ type: DELETE_TEST, payload: testId });
+      dispatch({ type: STOP_LOADING_UI });
       history.push('/home');
     })
     .catch(error => console.log(error));
 };
+
+export const clearErrors = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
+}

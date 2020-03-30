@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import {Form, Button, Segment, Header, TextArea, Label, Container} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
-import {addTest} from "../redux/actions/dataActions";
+import {addTest, clearErrors} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
 
 class AddTest extends Component {
@@ -27,8 +27,11 @@ class AddTest extends Component {
     return null;
   }
 
+
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.clearErrors();
+    this.setState({ errors: {} });
     const newTest = {
       name: this.state.name,
       description: this.state.description,
@@ -127,6 +130,7 @@ class AddTest extends Component {
 
 AddTest.propTypes = {
   addTest: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired
 };
 
@@ -134,4 +138,4 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 });
 
-export default  connect(mapStateToProps, {addTest})(AddTest);
+export default  connect(mapStateToProps, {addTest, clearErrors})(AddTest);

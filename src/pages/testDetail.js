@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 //Redux
 import { connect } from 'react-redux';
 import { getTest, deleteTest } from "../redux/actions/dataActions";
+import EditTest from "../components/EditTest";
 
 class TestDetail extends Component {
 
@@ -38,7 +39,9 @@ class TestDetail extends Component {
           <p>{turnaroundTime}</p>
         </Segment>
         <Container>
-          <Button color="blue" floated="left" as={Link} to='/'>Edit</Button>
+          <EditTest
+            testId={this.props.testId}
+          />
           <Button color="red" floated="right" onClick={this.handleDelete}>Delete</Button>
         </Container>
       </Segment>

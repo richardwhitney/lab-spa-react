@@ -1,52 +1,116 @@
 import React, {Component} from "react";
-import {Grid, Card, Loader, Dimmer} from "semantic-ui-react";
-
-import Test from '../components/Test';
-
-import {connect} from 'react-redux';
-import {getTests} from "../redux/actions/dataActions";
-import PropTypes from 'prop-types';
-import AddTest from "../components/AddTest";
+import {Grid, Card, Segment} from "semantic-ui-react";
+import {Link} from "react-router-dom";
 
 class Home extends Component{
 
-  componentDidMount() {
-    this.props.getTests();
-  }
-
   render() {
-    const {tests, loading} = this.props.data;
-    let testList = !loading ? (
-      tests.map((test) =>
-        <Test key={test.testId} test={test}/>
-      )
-    ) : (
-      <Dimmer active inverted>
-        <Loader size='large'/>
-      </Dimmer>
-    );
     return (
-      <Grid columns={2} padded style={{ marginTop: '7em'}}>
-        <Grid.Column width={6}>
-          <Card.Group centered>
-            {testList}
-          </Card.Group>
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <AddTest />
-        </Grid.Column>
+      <Grid columns={3}
+            padded style={{ marginTop: '7em', height: '100vh'}}
+            textAlign='center'>
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/testhub'}
+                     inverted color='red'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Test Guide
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/contacts'}
+                     inverted color='orange'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Contacts
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/clinicalPathways'}
+                     inverted color='yellow'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Clinical Pathways
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/haematology'}
+                     inverted color='olive'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Haematology
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/biochemistry'}
+                     inverted color='green'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Biochemistry
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/bloodTransfusion'}
+                     inverted color='teal'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Blood Transfusion
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/bloodProductInformation'}
+                     inverted color='blue'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Blood Product Information
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/generalInformation'}
+                     inverted color='violet'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              General Information
+            </Segment>
+          </Grid.Column>
+          <Grid.Column>
+            <Segment as={Link}
+                     to={'/usefulLinks'}
+                     inverted color='purple'
+                     padded style={{marginTop: '1em'}}
+                     size='massive'
+            >
+              Useful Links
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+
       </Grid>
     )
   }
 }
 
-Home.propTypes = {
-  getTests: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  data: state.data
-});
-
-export default connect(mapStateToProps, {getTests})(Home);
+export default Home;

@@ -1,7 +1,7 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Form, Button, Segment, Header, TextArea, Label, Container} from "semantic-ui-react";
+import {Form, Button, Segment, Header, TextArea, Label, Container, Modal, MenuItem} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 import {addTest, clearErrors} from "../redux/actions/dataActions";
@@ -17,7 +17,16 @@ class AddTest extends Component {
     specialNotes: '',
     specimenTypeVolume: '',
     turnaroundTime: '',
-    errors: {}
+    errors: {},
+    open: false
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -55,75 +64,81 @@ class AddTest extends Component {
     const {UI: {loading}} = this.props;
     const {errors} = this.state;
     return (
-      <Form size='large'
-            loading={!!loading}
-            onSubmit={this.handleSubmit}>
-        <Segment stacked clearing>
-          <Header as='h3'>Add Test</Header>
-          <Form.Input fluid
-                      placeholder='Test name'
-                      name='name'
-                      value={this.state.name}
-                      onChange={this.handleChange}
-                      error={!!errors.name}
-          />
-          {errors.name && <Label pointing color='red'>{errors.name}</Label>}
-          <Form.Input control={TextArea}
-                      placeholder='Test description'
-                      name='description'
-                      value={this.state.description}
-                      onChange={this.handleChange}
-                      error={!!errors.description}
-          />
-          {errors.description && <Label pointing color='red'>{errors.description}</Label>}
-          <Form.Input fluid
-                      placeholder='Reference range'
-                      name='referenceRange'
-                      value={this.state.referenceRange}
-                      onChange={this.handleChange}
-                      error={!!errors.referenceRange}
-          />
-          {errors.referenceRange && <Label pointing color='red'>{errors.referenceRange}</Label>}
-          <Form.Input fluid
-                      placeholder='Request form'
-                      name='requestForm'
-                      value={this.state.requestForm}
-                      onChange={this.handleChange}
-                      error={!!errors.requestForm}
-          />
-          {errors.requestForm && <Label pointing color='red'>{errors.requestForm}</Label>}
-          <Form.Input control={TextArea}
-                      placeholder='Special notes'
-                      name='specialNotes'
-                      value={this.state.specialNotes}
-                      onChange={this.handleChange}
-                      error={!!errors.specialNotes}
-          />
-          {errors.specialNotes && <Label pointing color='red'>{errors.specialNotes}</Label>}
-          <Form.Input fluid
-                      placeholder='Specimen type volume'
-                      name='specimenTypeVolume'
-                      value={this.state.specimenTypeVolume}
-                      onChange={this.handleChange}
-                      error={!!errors.specimenTypeVolume}
-          />
-          {errors.specimenTypeVolume && <Label pointing color='red'>{errors.specimenTypeVolume}</Label>}
-          <Form.Input fluid
-                      placeholder='Turnaround time'
-                      name='turnaroundTime'
-                      value={this.state.turnaroundTime}
-                      onChange={this.handleChange}
-                      error={!!errors.turnaroundTime}
-          />
-          {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
-          <Container>
-            <Button color='blue' size='large'>
-              Add Test
-            </Button>
-          </Container>
-          {errors.general && <Label pointing color='red'>{errors.general}</Label>}
-        </Segment>
-      </Form>
+      <Modal
+        trigger={<MenuItem onClick={this.handleOpen}>Add</MenuItem> }
+        open={this.state.open}
+        onClose={this.handleClose}
+        >
+        <Modal.Header>Add Test</Modal.Header>
+        <Modal.Content>
+          <Form size='large'
+                loading={!!loading}
+                onSubmit={this.handleSubmit}>
+            <Form.Input fluid
+                        placeholder='Test name'
+                        name='name'
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        error={!!errors.name}
+            />
+            {errors.name && <Label pointing color='red'>{errors.name}</Label>}
+            <Form.Input control={TextArea}
+                        placeholder='Test description'
+                        name='description'
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        error={!!errors.description}
+            />
+            {errors.description && <Label pointing color='red'>{errors.description}</Label>}
+            <Form.Input fluid
+                        placeholder='Reference range'
+                        name='referenceRange'
+                        value={this.state.referenceRange}
+                        onChange={this.handleChange}
+                        error={!!errors.referenceRange}
+            />
+            {errors.referenceRange && <Label pointing color='red'>{errors.referenceRange}</Label>}
+            <Form.Input fluid
+                        placeholder='Request form'
+                        name='requestForm'
+                        value={this.state.requestForm}
+                        onChange={this.handleChange}
+                        error={!!errors.requestForm}
+            />
+            {errors.requestForm && <Label pointing color='red'>{errors.requestForm}</Label>}
+            <Form.Input control={TextArea}
+                        placeholder='Special notes'
+                        name='specialNotes'
+                        value={this.state.specialNotes}
+                        onChange={this.handleChange}
+                        error={!!errors.specialNotes}
+            />
+            {errors.specialNotes && <Label pointing color='red'>{errors.specialNotes}</Label>}
+            <Form.Input fluid
+                        placeholder='Specimen type volume'
+                        name='specimenTypeVolume'
+                        value={this.state.specimenTypeVolume}
+                        onChange={this.handleChange}
+                        error={!!errors.specimenTypeVolume}
+            />
+            {errors.specimenTypeVolume && <Label pointing color='red'>{errors.specimenTypeVolume}</Label>}
+            <Form.Input fluid
+                        placeholder='Turnaround time'
+                        name='turnaroundTime'
+                        value={this.state.turnaroundTime}
+                        onChange={this.handleChange}
+                        error={!!errors.turnaroundTime}
+            />
+            {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
+            <Container>
+              <Button color='blue' size='large'>
+                Add Test
+              </Button>
+            </Container>
+            {errors.general && <Label pointing color='red'>{errors.general}</Label>}
+          </Form>
+        </Modal.Content>
+      </Modal>
     )
   }
 }

@@ -6,6 +6,8 @@ import axios from 'axios';
 // Redux
 import {Provider} from 'react-redux';
 import store from "./redux/store";
+import {SET_AUTHENTICATED} from "./redux/types";
+import {logoutUser} from "./redux/actions/userActions";
 // Pages
 import welcome from './pages/welcome';
 import login from './pages/login';
@@ -20,13 +22,12 @@ import contacts from './pages/contacts';
 import generalInformation from './pages/generalInformation';
 import haematology from './pages/haematology';
 import usefulLinks from './pages/usefulLinks';
-// Components
-import Navbar from './components/Navbar';
-import AuthRoute from './utils/AuthRoute';
-// Redux
-import {SET_AUTHENTICATED} from "./redux/types";
-import {logoutUser} from "./redux/actions/userActions";
 import TestDetail from "./pages/testDetail";
+// Components
+import Navbar from './components/Navbar/Navbar';
+import AuthRoute from './utils/AuthRoute';
+
+
 
 axios.defaults.baseURL = 'https://europe-west1-lab-fyp-rw.cloudfunctions.net/api';
 

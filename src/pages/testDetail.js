@@ -1,21 +1,15 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import {Segment, Dimmer, Loader, Header, Button, Container} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 //Redux
 import { connect } from 'react-redux';
-import { getTest, deleteTest } from "../redux/actions/dataActions";
-import EditTest from "../components/EditTest";
+import PropTypes from 'prop-types';
+import { getTest } from "../redux/actions/dataActions";
 
 class TestDetail extends Component {
 
   componentDidMount() {
     this.props.getTest(this.props.testId);
-  };
-
-  handleDelete = (event) => {
-    event.preventDefault();
-    this.props.deleteTest(this.props.testId, this.props.history);
   };
 
   render() {
@@ -38,12 +32,6 @@ class TestDetail extends Component {
           <Header as='h3'>Turnaround Time</Header>
           <p>{turnaroundTime}</p>
         </Segment>
-        <Container>
-          <EditTest
-            testId={this.props.testId}
-          />
-          <Button color="red" floated="right" onClick={this.handleDelete}>Delete</Button>
-        </Container>
       </Segment>
     ) : (
       <Dimmer active inverted style={{ marginTop: '7em'}}>
@@ -58,7 +46,6 @@ class TestDetail extends Component {
 
 TestDetail.propTypes = {
   getTest: PropTypes.func.isRequired,
-  deleteTest: PropTypes.func.isRequired,
   testId: PropTypes.string.isRequired,
   test: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
@@ -71,8 +58,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapActionsToProps = {
-  getTest,
-  deleteTest
+  getTest
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(TestDetail);

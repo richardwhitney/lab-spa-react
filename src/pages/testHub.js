@@ -26,16 +26,9 @@ class TestHub extends Component{
       </Dimmer>
     );
     return (
-      <Grid columns={2} padded style={{ marginTop: '7em'}}>
-        <Grid.Column width={6}>
-          <Card.Group centered>
-            {testList}
-          </Card.Group>
-        </Grid.Column>
-        <Grid.Column width={10}>
-          <AddTest />
-        </Grid.Column>
-      </Grid>
+      <Card.Group centered style={{ marginTop: '7em'}}>
+        {testList}
+      </Card.Group>
     )
   }
 }

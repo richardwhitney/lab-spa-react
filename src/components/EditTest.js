@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import {Button, Header, Icon, Modal, Form, Container} from 'semantic-ui-react'
+import React, { Component } from "react";
+import {Button, Header, Icon, Modal, Form, Container, MenuItem} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -65,7 +65,7 @@ class EditTest extends Component {
   render() {
     return (
       <Modal
-        trigger={<Button onClick={this.handleOpen}>Edit</Button> }
+        trigger={<MenuItem onClick={this.handleOpen}>Edit</MenuItem> }
         open={this.state.open}
         onClose={this.handleClose}
       >

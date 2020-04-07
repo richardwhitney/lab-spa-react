@@ -1,22 +1,38 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Form, Button, Segment, Header, TextArea, Label, Container, Modal, MenuItem} from "semantic-ui-react";
+import {Form, Button, Select, Header, TextArea, Label, Container, Modal, MenuItem} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 import {addTest, clearErrors} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
 
+const departments = [
+  { key: '01', value: 'Blood Transfusion', text: 'Blood Transfusion' },
+  { key: '02', value: 'Haematology', text: 'Haematology' },
+  { key: '03', value: 'Biochemistry', text: 'Biochemistry' },
+  { key: '04', value: 'UHW - Microbiology', text: 'UHW - Microbiology' },
+  { key: '05', value: 'UHW - Haematology', text: 'UHW - Haematology' },
+  { key: '06', value: 'UHW - Biochemistry', text: 'UHW - Biochemistry' },
+  { key: '07', value: 'UHW - Serology', text: 'UHW - Serology' },
+  { key: '08', value: 'UHW - Histology', text: 'UHW - Histology'},
+  { key: '09', value: 'External Referral', text: 'External Referral'}
+];
+
 class AddTest extends Component {
 
   state = {
     name: '',
-    description: '',
-    referenceRange: '',
+    department: '',
+    departmentId: '',
     requestForm: '',
-    specialNotes: '',
-    specimenTypeVolume: '',
+    specimenType: '',
+    specimenContainer: '',
+    specimenVolume: '',
+    specimenRequirements: '',
     turnaroundTime: '',
+    phoneAlertLimits: '',
+    specialNotes: '',
     errors: {},
     open: false
   };
@@ -26,16 +42,40 @@ class AddTest extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.props.clearErrors();
+    this.setState({ open: false, errors: {} });
   };
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.UI.errors) {
-      return { errors: props.UI.errors };
+  /*static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.UI.errors) {
+      return { errors: nextProps.UI.errors };
+    }
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+      return { open: false, errors: {} };
     }
     return null;
+  }*/
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors
+      });
+    }
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+      this.setState({ open: false, errors: {} });
+    }
   }
 
+  /*componentDidUpdate(prevProps, prevState, snapshot) {
+    const {UI: {loading, errors}  } = this.props;
+    if (loading !== prevProps.UI.loading || errors !== prevProps.UI.errors) {
+      if (loading === false && errors === null)
+        console.log("Close model");
+        this.handleClose();
+    }
+    if (!)
+  }*/
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -43,12 +83,15 @@ class AddTest extends Component {
     this.setState({ errors: {} });
     const newTest = {
       name: this.state.name,
-      description: this.state.description,
-      referenceRange: this.state.referenceRange,
+      department: this.state.department,
       requestForm: this.state.requestForm,
-      specialNotes: this.state.specialNotes,
-      specimenTypeVolume: this.state.specimenTypeVolume,
-      turnaroundTime: this.state.turnaroundTime
+      specimenType: this.state.specimenType,
+      specimenContainer: this.state.specimenContainer,
+      specimenVolume: this.state.specimenVolume,
+      specimenRequirements: this.state.specimenRequirements,
+      turnaroundTime: this.state.turnaroundTime,
+      phoneAlertLimits: this.state.phoneAlertLimits,
+      specialNotes: this.state.specialNotes
     };
     this.props.addTest(newTest);
   };
@@ -58,6 +101,16 @@ class AddTest extends Component {
     this.setState({
       [name]: value
     });
+  };
+
+  handleSelectChange = (event, result) => {
+    const { value } = result;
+    console.log(`Select value: ${value}`);
+    const { key } = result.options.find(o => o.value === value);
+    this.setState({
+      department: value,
+      departmentId: key
+    })
   };
 
   render() {
@@ -75,6 +128,7 @@ class AddTest extends Component {
                 loading={!!loading}
                 onSubmit={this.handleSubmit}>
             <Form.Input fluid
+                        label='Name'
                         placeholder='Test name'
                         name='name'
                         value={this.state.name}
@@ -82,23 +136,19 @@ class AddTest extends Component {
                         error={!!errors.name}
             />
             {errors.name && <Label pointing color='red'>{errors.name}</Label>}
-            <Form.Input control={TextArea}
-                        placeholder='Test description'
-                        name='description'
-                        value={this.state.description}
-                        onChange={this.handleChange}
-                        error={!!errors.description}
+            <Form.Input label='Department'
+                        control={Select}
+                        selection
+                        options={departments}
+                        placeholder='Select department'
+                        name='department'
+                        value={this.state.department}
+                        onChange={this.handleSelectChange}
+                        error={!!errors.department}
             />
-            {errors.description && <Label pointing color='red'>{errors.description}</Label>}
+            {errors.department && <Label pointing color='red'>{errors.department}</Label>}
             <Form.Input fluid
-                        placeholder='Reference range'
-                        name='referenceRange'
-                        value={this.state.referenceRange}
-                        onChange={this.handleChange}
-                        error={!!errors.referenceRange}
-            />
-            {errors.referenceRange && <Label pointing color='red'>{errors.referenceRange}</Label>}
-            <Form.Input fluid
+                        label='Request Form'
                         placeholder='Request form'
                         name='requestForm'
                         value={this.state.requestForm}
@@ -106,23 +156,42 @@ class AddTest extends Component {
                         error={!!errors.requestForm}
             />
             {errors.requestForm && <Label pointing color='red'>{errors.requestForm}</Label>}
-            <Form.Input control={TextArea}
-                        placeholder='Special notes'
-                        name='specialNotes'
-                        value={this.state.specialNotes}
-                        onChange={this.handleChange}
-                        error={!!errors.specialNotes}
-            />
-            {errors.specialNotes && <Label pointing color='red'>{errors.specialNotes}</Label>}
             <Form.Input fluid
-                        placeholder='Specimen type volume'
-                        name='specimenTypeVolume'
-                        value={this.state.specimenTypeVolume}
+                        label='Specimen Type'
+                        placeholder='Specimen type'
+                        name='specimenType'
+                        value={this.state.specimenType}
                         onChange={this.handleChange}
-                        error={!!errors.specimenTypeVolume}
+                        error={!!errors.specimenType}
             />
-            {errors.specimenTypeVolume && <Label pointing color='red'>{errors.specimenTypeVolume}</Label>}
+            {errors.specimenType && <Label pointing color='red'>{errors.specimenType}</Label>}
             <Form.Input fluid
+                        label='Specimen Container'
+                        placeholder='Specimen container'
+                        name='specimenContainer'
+                        value={this.state.specimenContainer}
+                        onChange={this.handleChange}
+                        error={!!errors.specimenContainer}
+            />
+            {errors.specimenContainer && <Label pointing color='red'>{errors.specimenContainer}</Label>}
+            <Form.Input fluid
+                        label='Specimen Volume'
+                        placeholder='Specimen volume'
+                        name='specimenVolume'
+                        value={this.state.specimenVolume}
+                        onChange={this.handleChange}
+                        error={!!errors.specimenVolume}
+            />
+            {errors.specimenVolume && <Label pointing color='red'>{errors.specimenVolume}</Label>}
+            <Form.Input fluid
+                        label='Specimen Requirements'
+                        placeholder='Specimen requirements'
+                        name='specimenRequirements'
+                        value={this.state.specimenRequirements}
+                        onChange={this.handleChange}
+            />
+            <Form.Input fluid
+                        label='Turnaround Time'
                         placeholder='Turnaround time'
                         name='turnaroundTime'
                         value={this.state.turnaroundTime}
@@ -130,8 +199,23 @@ class AddTest extends Component {
                         error={!!errors.turnaroundTime}
             />
             {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
+            <Form.Input fluid
+                        label='Phone Alert Limit'
+                        placeholder='Phone alert limits'
+                        name='phoneAlertLimits'
+                        value={this.state.phoneAlertLimits}
+                        onChange={this.handleChange}
+            />
+            <Form.Input control={TextArea}
+                        label='Special Notes'
+                        placeholder='Special notes'
+                        name='specialNotes'
+                        value={this.state.specialNotes}
+                        onChange={this.handleChange}
+            />
+
             <Container>
-              <Button color='blue' size='large'>
+              <Button type='submit' color='blue' size='large'>
                 Add Test
               </Button>
             </Container>

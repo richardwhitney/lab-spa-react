@@ -15,7 +15,6 @@ class Signup extends Component{
       email: '',
       password: '',
       confirmPassword: '',
-      userHandle: '',
       errors: {}
     }
   };
@@ -35,8 +34,7 @@ class Signup extends Component{
     const newUserData = {
       email: this.state.email,
       password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-      handle: this.state.userHandle
+      confirmPassword: this.state.confirmPassword
     };
     this.props.signupUser(newUserData, this.props.history)
   };
@@ -93,16 +91,6 @@ class Signup extends Component{
                           error={!!errors.confirmPassword}
               />
               {errors.confirmPassword && <Label pointing color='red'>{errors.confirmPassword}</Label>}
-              <Form.Input fluid
-                          icon='user'
-                          iconPosition='left'
-                          placeholder='Username'
-                          name='userHandle'
-                          value={this.state.userHandle}
-                          onChange={this.handleChange}
-                          error={!!errors.handle}
-              />
-              {errors.handle && <Label pointing color='red'>{errors.handle}</Label>}
               <Button color='blue' fluid size='large'>
                 Sign Up
               </Button>

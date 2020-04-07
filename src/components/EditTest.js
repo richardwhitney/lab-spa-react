@@ -1,36 +1,60 @@
 import React, { Component } from "react";
-import {Button, Header, Icon, Modal, Form, Container, MenuItem} from 'semantic-ui-react'
+import {Button, Header, Icon, Modal, Form, Container, MenuItem, Label, TextArea} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { editTest } from "../redux/actions/dataActions";
+import { editTest, clearErrors } from "../redux/actions/dataActions";
+
+const departments = [
+  { key: '01', value: 'Blood Transfusion', text: 'Blood Transfusion' },
+  { key: '02', value: 'Haematology', text: 'Haematology' },
+  { key: '03', value: 'Biochemistry', text: 'Biochemistry' },
+  { key: '04', value: 'UHW - Microbiology', text: 'UHW - Microbiology' },
+  { key: '05', value: 'UHW - Haematology', text: 'UHW - Haematology' },
+  { key: '06', value: 'UHW - Biochemistry', text: 'UHW - Biochemistry' },
+  { key: '07', value: 'UHW - Serology', text: 'UHW - Serology' },
+  { key: '08', value: 'UHW - Histology', text: 'UHW - Histology'},
+  { key: '09', value: 'External Referral', text: 'External Referral'}
+];
 
 class EditTest extends Component {
   state = {
     name: '',
-    description: '',
-    referenceRange: '',
+    department: '',
+    departmentId: '',
     requestForm: '',
-    specialNotes: '',
-    specimenTypeVolume: '',
+    specimenType: '',
+    specimenContainer: '',
+    specimenVolume: '',
+    specimenRequirements: '',
     turnaroundTime: '',
+    phoneAlertLimits: '',
+    specialNotes: '',
+    errors: {},
     open: false
   };
-
-  componentDidMount() {
-  }
 
   mapTestDetailsToState = (test) => {
     this.setState({
       name: test.name ? test.name : '',
-      description: test.description ? test.description : '',
-      referenceRange: test.referenceRange ? test.referenceRange : '',
+      department: test.department ? test.department : '',
       requestForm: test.requestForm ? test.requestForm : '',
-      specialNotes: test.specialNotes ? test.specialNotes : '',
-      specimenTypeVolume: test.specimenTypeVolume ? test.specimenTypeVolume : '',
-      turnaroundTime: test.turnaroundTime ? test.turnaroundTime : ''
+      specimenType: test.specimenType ? test.specimenType : '',
+      specimenContainer: test.specimenContainer ? test.specimenContainer : '',
+      specimenVolume: test.specimenVolume ? test.specimenVolume : '',
+      specimenRequirements: test.specimenRequirements ? test.specimenRequirements : '',
+      turnaroundTime: test.turnaroundTime ? test.turnaroundTime : '',
+      phoneAlertLimits: test.phoneAlertLimits ? test.phoneAlertLimits : '',
+      specialNotes: test.specialNotes ? test.specialNotes : ''
     });
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.UI.errors) {
+      return { errors: props.UI.errors };
+    }
+    return null;
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -50,19 +74,26 @@ class EditTest extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.props.clearErrors();
+    this.setState({ errors: {} });
     const updatedTest = {
       name: this.state.name,
-      description: this.state.description,
-      referenceRange: this.state.referenceRange,
+      department: this.state.department,
       requestForm: this.state.requestForm,
-      specialNotes: this.state.specialNotes,
-      specimenTypeVolume: this.state.specimenTypeVolume,
-      turnaroundTime: this.state.turnaroundTime
+      specimenType: this.state.specimenType,
+      specimenContainer: this.state.specimenContainer,
+      specimenVolume: this.state.specimenVolume,
+      specimenRequirements: this.state.specimenRequirements,
+      turnaroundTime: this.state.turnaroundTime,
+      phoneAlertLimits: this.state.phoneAlertLimits,
+      specialNotes: this.state.specialNotes
     };
     this.props.editTest(updatedTest, this.props.testId);
   };
 
   render() {
+    const {UI: {loading}} = this.props;
+    const {errors} = this.state;
     return (
       <Modal
         trigger={<MenuItem onClick={this.handleOpen}>Edit</MenuItem> }
@@ -71,61 +102,81 @@ class EditTest extends Component {
       >
         <Modal.Header>Edit Test</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Input
-              label="Name"
-              placeholder = "Name"
-              name = "name"
-              value={this.state.name}
-              onChange={this.handleChange}
+          <Form size='large'
+                loading={!!loading}
+                onSubmit={this.handleSubmit}>
+            <Form.Input fluid
+                        placeholder='Test name'
+                        name='name'
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        error={!!errors.name}
             />
-            <Form.Input
-              label="Description"
-              placeholder = "Description"
-              name = "description"
-              value={this.state.description}
-              onChange={this.handleChange}
+            {errors.name && <Label pointing color='red'>{errors.name}</Label>}
+            <Form.Input fluid
+                        placeholder='Test department'
+                        name='department'
+                        value={this.state.department}
+                        onChange={this.handleChange}
+                        error={!!errors.department}
             />
-            <Form.Input
-              label="Reference Range"
-              placeholder = "Reference range"
-              name = "referenceRange"
-              value={this.state.referenceRange}
-              onChange={this.handleChange}
+            {errors.department && <Label pointing color='red'>{errors.department}</Label>}
+            <Form.Input fluid
+                        placeholder='Request form'
+                        name='requestForm'
+                        value={this.state.requestForm}
+                        onChange={this.handleChange}
+                        error={!!errors.requestForm}
             />
-            <Form.Input
-              label="Request Form"
-              placeholder = "Request form"
-              name = "requestForm"
-              value={this.state.requestForm}
-              onChange={this.handleChange}
+            {errors.requestForm && <Label pointing color='red'>{errors.requestForm}</Label>}
+            <Form.Input fluid
+                        placeholder='Specimen type'
+                        name='specimenType'
+                        value={this.state.specimenType}
+                        onChange={this.handleChange}
+                        error={!!errors.specimenType}
             />
-            <Form.Input
-              label="Special Notes"
-              placeholder = "Special notes"
-              name = "specialNotes"
-              value={this.state.specialNotes}
-              onChange={this.handleChange}
+            {errors.specimenType && <Label pointing color='red'>{errors.specimenType}</Label>}
+            <Form.Input fluid
+                        placeholder='Specimen volume'
+                        name='specimenType'
+                        value={this.state.specimenVolume}
+                        onChange={this.handleChange}
+                        error={!!errors.specimenVolume}
             />
-            <Form.Input
-              label="Specimen Type Volume"
-              placeholder = "Specimen type volume"
-              name = "specimenTypeVolume"
-              value={this.state.specimenTypeVolume}
-              onChange={this.handleChange}
+            {errors.specimenVolume && <Label pointing color='red'>{errors.specimenVolume}</Label>}
+            <Form.Input fluid
+                        placeholder='Specimen Requirements'
+                        name='specimenRequirements'
+                        value={this.state.specimenRequirements}
+                        onChange={this.handleChange}
             />
-            <Form.Input
-              label="Turnaround Time"
-              placeholder = "Turnaround Time"
-              name = "turnaroundTime"
-              value={this.state.turnaroundTime}
-              onChange={this.handleChange}
+            <Form.Input fluid
+                        placeholder='Turnaround time'
+                        name='turnaroundTime'
+                        value={this.state.turnaroundTime}
+                        onChange={this.handleChange}
+                        error={!!errors.turnaroundTime}
+            />
+            {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
+            <Form.Input fluid
+                        placeholder='Phone alert limits'
+                        name='phoneAlertLimits'
+                        value={this.state.phoneAlertLimits}
+                        onChange={this.handleChange}
+            />
+            <Form.Input control={TextArea}
+                        placeholder='Special notes'
+                        name='specialNotes'
+                        value={this.state.specialNotes}
+                        onChange={this.handleChange}
             />
             <Container>
               <Button color='blue' size='large'>
                 Save
               </Button>
             </Container>
+            {errors.general && <Label pointing color='red'>{errors.general}</Label>}
           </Form>
         </Modal.Content>
       </Modal>
@@ -135,7 +186,8 @@ class EditTest extends Component {
 
 EditTest.propTypes = {
   editTest: PropTypes.func.isRequired,
-  testId: PropTypes.string.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+  //testId: PropTypes.string.isRequired,
   test: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
 };
@@ -145,4 +197,4 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 });
 
-export default connect(mapStateToProps, { editTest })(EditTest);
+export default connect(mapStateToProps, { editTest, clearErrors })(EditTest);

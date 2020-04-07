@@ -74,4 +74,4 @@ export const deleteTest = (testId, history) => dispatch => {
 
 export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
-}
+};

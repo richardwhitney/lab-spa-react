@@ -3,6 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import {Menu, MenuItem, Input} from "semantic-ui-react";
 // Components
 import AddTest from "../AddTest";
+import TestSearchBar from "../TestSearchBar";
 
 class TestHubMenuItems extends Component {
 
@@ -19,7 +20,7 @@ class TestHubMenuItems extends Component {
         </Menu.Menu>
         <Menu.Menu position="right">
           <MenuItem>
-            <Input size='mini' icon='search' placeholder='Search...' />
+            <TestSearchBar/>
           </MenuItem>
           <AddTest/>
         </Menu.Menu>

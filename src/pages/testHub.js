@@ -1,12 +1,11 @@
-import React, {Component} from "react";
-import {Grid, Card, Loader, Dimmer} from "semantic-ui-react";
+import React, {Component, Fragment} from "react";
+import {Card, Loader, Dimmer, Header} from "semantic-ui-react";
 
 import Test from '../components/Test';
 
 import {connect} from 'react-redux';
 import {getTests} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
-import AddTest from "../components/AddTest";
 
 class TestHub extends Component{
 
@@ -18,7 +17,7 @@ class TestHub extends Component{
     const {tests, loading} = this.props.data;
     let testList = !loading ? (
       tests.map((test) =>
-        <Test key={test.testId} test={test}/>
+      <Test key={test.testId} test={test}/>
       )
     ) : (
       <Dimmer active inverted>
@@ -26,9 +25,12 @@ class TestHub extends Component{
       </Dimmer>
     );
     return (
-      <Card.Group centered style={{ marginTop: '7em'}}>
-        {testList}
-      </Card.Group>
+      <Fragment>
+        <Header as='h2' textAlign='center' style={{ marginTop: '7em'}}>{tests.length} Test(s)</Header>
+        <Card.Group centered>
+          {testList}
+        </Card.Group>
+      </Fragment>
     )
   }
 }

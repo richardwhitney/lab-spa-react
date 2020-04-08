@@ -1,7 +1,8 @@
-import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST} from "../types";
+import {SET_TESTS, SET_FILTERED_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST} from "../types";
 
 const initialState = {
   tests: [],
+  filteredTests: [],
   test: {},
   loading: false
 };
@@ -17,6 +18,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tests: action.payload,
+        loading: false
+      };
+    case SET_FILTERED_TESTS:
+      return {
+        ...state,
+        filteredTests: action.payload,
         loading: false
       };
     case ADD_TEST:

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Search, Label, Header, Segment } from 'semantic-ui-react'
+import {Link} from "react-router-dom";
 
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 const initialState = { isLoading: false, results: [], value: '' };
 
-const resultRenderer = ({ name }) => <Label content={name} />;
+const resultRenderer = ({ name, testId }) => <Label as={Link} to={`/tests/${testId}`}>{name}</Label>;
 
 resultRenderer.propTypes = {
   name: PropTypes.string
@@ -32,7 +33,6 @@ class TestSearchBar extends Component {
         isLoading: false,
         results: _.filter(this.props.data.tests, isMatch),
       });
-      console.log(`Search results: ${JSON.stringify(this.state.results)}`);
     }, 300)
   };
 

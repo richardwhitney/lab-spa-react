@@ -67,7 +67,7 @@ export const deleteTest = (testId, history) => dispatch => {
     .then(() => {
       dispatch({ type: DELETE_TEST, payload: testId });
       dispatch({ type: STOP_LOADING_UI });
-      history.push('/home');
+      history.push('/testhub');
     })
     .catch(error => console.log(error));
 };

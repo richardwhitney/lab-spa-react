@@ -19,9 +19,7 @@ class TestHubMenuItems extends Component {
           </Link>
         </Menu.Menu>
         <Menu.Menu position="right">
-          <MenuItem>
-            <TestSearchBar/>
-          </MenuItem>
+
           <AddTest/>
         </Menu.Menu>
       </Fragment>

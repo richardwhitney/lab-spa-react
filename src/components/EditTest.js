@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Header, Icon, Modal, Form, Container, MenuItem, Label, TextArea} from 'semantic-ui-react'
+import {Button, Header, Icon, Modal, Form, Container, MenuItem, Label, TextArea, Select} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -49,11 +49,15 @@ class EditTest extends Component {
     });
   };
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.UI.errors) {
-      return { errors: props.UI.errors };
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors
+      });
     }
-    return null;
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+      this.setState({ open: false, errors: {} });
+    }
   }
 
   handleOpen = () => {
@@ -72,6 +76,16 @@ class EditTest extends Component {
     });
   };
 
+  handleSelectChange = (event, result) => {
+    const { value } = result;
+    console.log(`Select value: ${value}`);
+    const { key } = result.options.find(o => o.value === value);
+    this.setState({
+      department: value,
+      departmentId: key
+    })
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.clearErrors();
@@ -88,7 +102,7 @@ class EditTest extends Component {
       phoneAlertLimits: this.state.phoneAlertLimits,
       specialNotes: this.state.specialNotes
     };
-    this.props.editTest(updatedTest, this.props.testId);
+    this.props.editTest(updatedTest, this.props.test.testId);
   };
 
   render() {
@@ -113,11 +127,14 @@ class EditTest extends Component {
                         error={!!errors.name}
             />
             {errors.name && <Label pointing color='red'>{errors.name}</Label>}
-            <Form.Input fluid
-                        placeholder='Test department'
+            <Form.Input label='Department'
+                        control={Select}
+                        selection
+                        options={departments}
+                        placeholder='Select department'
                         name='department'
                         value={this.state.department}
-                        onChange={this.handleChange}
+                        onChange={this.handleSelectChange}
                         error={!!errors.department}
             />
             {errors.department && <Label pointing color='red'>{errors.department}</Label>}

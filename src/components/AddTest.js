@@ -237,4 +237,4 @@ const mapStateToProps = (state) => ({
   UI: state.UI
 });
 
-export default  connect(mapStateToProps, {addTest, clearErrors})(AddTest);
+export default connect(mapStateToProps, {addTest, clearErrors})(AddTest);

@@ -6,17 +6,38 @@ import Test from '../components/Test';
 import {connect} from 'react-redux';
 import {getTests} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
+import FilterControls from "../components/FilterControls";
 
 class TestHub extends Component{
+
+  state = {
+    search: "",
+    department: "All"
+  };
 
   componentDidMount() {
     this.props.getTests();
   }
 
+  handleChange = (type, value) => {
+    type === "name"
+    ? this.setState( { search: value })
+      : this.setState({ department: value });
+  };
+
   render() {
     const {tests, loading} = this.props.data;
+    let filteredTests = tests.filter(t => {
+      const name = t.name;
+      return name.toLocaleLowerCase().search(this.state.search.toLocaleLowerCase()) !== -1;
+    });
+    filteredTests = this.state.department === "All"
+    ? filteredTests
+      : filteredTests.filter(t => t.department === this.state.department);
+
     let testList = !loading ? (
-      tests.map((test) =>
+      filteredTests
+        .map((test) =>
       <Test key={test.testId} test={test}/>
       )
     ) : (
@@ -26,7 +47,8 @@ class TestHub extends Component{
     );
     return (
       <Fragment>
-        <Header as='h2' textAlign='center' style={{ marginTop: '7em'}}>{tests.length} Test(s)</Header>
+        <Header as='h2' textAlign='center' style={{ marginTop: '7em'}}>{testList.length} Test(s)</Header>
+        <FilterControls onUserInput={this.handleChange}/>
         <Card.Group centered>
           {testList}
         </Card.Group>

@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from "react";
-import {Link, withRouter} from "react-router-dom";
-import {Menu} from "semantic-ui-react";
+import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import HomeMenuItems from "./HomeMenuItems";
 import TestHubMenuItems from "./TestHubMenuItems";
 import TestDetailMenuItems from "./TestDetailMenuItems";
+import DefaultMenuItems from "./DefaultMenuItems";
 
 class AuthNavbar extends Component {
 
@@ -20,7 +20,7 @@ class AuthNavbar extends Component {
       return <TestDetailMenuItems/>
     }
     else {
-      return <HomeMenuItems/>
+      return <DefaultMenuItems/>
     }
   }
 }

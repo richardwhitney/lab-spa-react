@@ -49,8 +49,7 @@ class TestHubMenuItems extends Component {
 }
 
 TestHubMenuItems.propTypes = {
-  deleteTest: PropTypes.func.isRequired,
-  testId: PropTypes.string.isRequired
+  deleteTest: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -204,7 +204,6 @@ class EditTest extends Component {
 EditTest.propTypes = {
   editTest: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
-  //testId: PropTypes.string.isRequired,
   test: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
 };

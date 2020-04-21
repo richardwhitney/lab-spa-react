@@ -98,12 +98,12 @@ class Home extends Component{
           </Grid.Column>
           <Grid.Column>
             <Segment as={Link}
-                     to={'/usefulLinks'}
+                     to={'/quizhub'}
                      inverted color='purple'
                      padded style={{marginTop: '1em'}}
                      size='massive'
             >
-              Useful Links
+              Quiz Hub
             </Segment>
           </Grid.Column>
         </Grid.Row>

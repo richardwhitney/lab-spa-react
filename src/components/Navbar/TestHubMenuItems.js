@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from "react";
 import {Link, withRouter} from "react-router-dom";
-import {Menu, MenuItem, Input} from "semantic-ui-react";
+import {Menu} from "semantic-ui-react";
 // Components
 import AddTest from "../AddTest";
-import TestSearchBar from "../TestSearchBar";
 
 class TestHubMenuItems extends Component {
 
@@ -19,7 +18,6 @@ class TestHubMenuItems extends Component {
           </Link>
         </Menu.Menu>
         <Menu.Menu position="right">
-
           <AddTest/>
         </Menu.Menu>
       </Fragment>

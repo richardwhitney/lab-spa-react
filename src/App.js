@@ -21,8 +21,10 @@ import clinicalPathways from './pages/clinicalPathways';
 import contacts from './pages/contacts';
 import generalInformation from './pages/generalInformation';
 import haematology from './pages/haematology';
+import quizHub from "./pages/quizHub";
 import usefulLinks from './pages/usefulLinks';
 import TestDetail from "./pages/testDetail";
+import QuizDetail from "./pages/quizDetail";
 // Components
 import Navbar from './components/Navbar/Navbar';
 import AuthRoute from './utils/AuthRoute';
@@ -86,11 +88,17 @@ class App extends Component {
             <Route path="/haematology"
                    component={haematology}
             />
+            <Route path="/quizhub"
+                   component={quizHub}
+            />
             <Route path="/usefulLinks"
                    component={usefulLinks}
             />
             <Route path="/tests/:testId"
                    component={TestDetail}
+            />
+            <Route path="/quizzes/:quizId"
+                   component={QuizDetail}
             />
           </Switch>
         </Router>

@@ -1,4 +1,4 @@
-import {SET_TESTS, LOADING_DATA, LOADING_UI, STOP_LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST, SET_TEST, DELETE_TEST} from '../types';
+import {SET_TESTS, LOADING_DATA, LOADING_UI, STOP_LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ } from '../types';
 import axios from 'axios';
 import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
@@ -70,6 +70,36 @@ export const deleteTest = (testId, history) => dispatch => {
       history.push('/testhub');
     })
     .catch(error => console.log(error));
+};
+
+export const getQuizzes = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/quizzes')
+    .then(result => {
+      dispatch({
+        type: SET_QUIZZES,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_QUIZZES,
+        payload: []
+      })
+    })
+};
+
+export const getQuiz = (quizId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/quizzes/${quizId}`)
+    .then(response => {
+      dispatch({
+        type: SET_QUIZ,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log());
 };
 
 export const clearErrors = () => dispatch => {

@@ -1,9 +1,10 @@
-import {SET_TESTS, SET_FILTERED_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST} from "../types";
+import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ} from "../types";
 
 const initialState = {
   tests: [],
-  filteredTests: [],
   test: {},
+  quizzes: [],
+  quiz: {},
   loading: false
 };
 
@@ -18,12 +19,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         tests: action.payload,
-        loading: false
-      };
-    case SET_FILTERED_TESTS:
-      return {
-        ...state,
-        filteredTests: action.payload,
         loading: false
       };
     case ADD_TEST:
@@ -45,6 +40,18 @@ export default function (state = initialState, action) {
       state.tests.splice(index, 1);
       return {
         ...state
+      };
+    case SET_QUIZZES:
+      return {
+        ...state,
+        quizzes: action.payload,
+        loading: false
+      };
+    case SET_QUIZ:
+      return {
+        ...state,
+        quiz: action.payload,
+        loading: false
       };
     default:
       return state;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Segment, Dimmer, Loader, Header, Button, Container} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import {Segment, Dimmer, Loader, Header} from "semantic-ui-react";
 //Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,7 +8,7 @@ import { getTest } from "../redux/actions/dataActions";
 class TestDetail extends Component {
 
   componentDidMount() {
-    this.props.getTest(this.props.testId);
+    this.props.getTest(this.props.match.params.testId);
   };
 
   render() {
@@ -52,14 +51,12 @@ class TestDetail extends Component {
 
 TestDetail.propTypes = {
   getTest: PropTypes.func.isRequired,
-  testId: PropTypes.string.isRequired,
   test: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   test: state.data.test,
-  testId: ownProps.match.params.testId,
   UI: state.UI
 });
 

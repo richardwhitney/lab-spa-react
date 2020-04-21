@@ -13,7 +13,8 @@ export const STOP_LOADING_UI = 'STOP_LOADING_UI';
 
 // Data reducer types
 export const SET_TESTS = 'SET_TESTS';
-export const SET_FILTERED_TESTS = 'SET_FILTERED_TESTS';
 export const SET_TEST = 'SET_TEST';
 export const DELETE_TEST = 'DELETE_TEST';
 export const ADD_TEST = 'ADD_TEST';
+export const SET_QUIZZES = 'SET_QUIZZES';
+export const SET_QUIZ = 'SET_QUIZ';

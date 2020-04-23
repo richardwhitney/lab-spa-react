@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Header, Icon, Modal, Form, Container, MenuItem, Label, TextArea, Select} from 'semantic-ui-react'
+import {Button, Modal, Form, Container, MenuItem, Label, TextArea, Select} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';

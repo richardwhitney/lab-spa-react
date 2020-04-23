@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Select, Header, Input, Label, Container, Segment, Dropdown} from "semantic-ui-react";
+import {Select, Input, Segment, Dropdown} from "semantic-ui-react";
 
 const departments = [
   { key: '00', value: 'All', text: 'All' },

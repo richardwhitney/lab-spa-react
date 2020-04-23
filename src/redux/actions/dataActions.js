@@ -1,6 +1,5 @@
 import {SET_TESTS, LOADING_DATA, LOADING_UI, STOP_LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ } from '../types';
 import axios from 'axios';
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
 // Get all tests
 export const getTests = () => dispatch => {

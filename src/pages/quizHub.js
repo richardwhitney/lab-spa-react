@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from "react";
-import {Card, Loader, Dimmer, Header} from "semantic-ui-react";
+import React, {Component} from "react";
+import {Card, Loader, Dimmer} from "semantic-ui-react";
 
 import Quiz from "../components/Quiz";
 

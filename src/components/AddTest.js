@@ -1,7 +1,7 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Form, Button, Select, Header, TextArea, Label, Container, Modal, MenuItem} from "semantic-ui-react";
+import {Form, Button, Select, TextArea, Label, Container, Modal, MenuItem} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 import {addTest, clearErrors} from "../redux/actions/dataActions";

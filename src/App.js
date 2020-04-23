@@ -28,6 +28,7 @@ import QuizDetail from "./pages/quizDetail";
 // Components
 import Navbar from './components/Navbar/Navbar';
 import AuthRoute from './utils/AuthRoute';
+import PrivateRoute from "./utils/PrivateRoute";
 
 
 
@@ -61,43 +62,43 @@ class App extends Component {
             <AuthRoute exact path="/signup"
                        component={signup}
             />
-            <Route exact path="/home"
+            <PrivateRoute exact path="/home"
                    component={home}
             />
-            <Route path="/testhub"
+            <PrivateRoute path="/testhub"
                    component={testHub}
             />
-            <Route path="/biochemistry"
+            <PrivateRoute path="/biochemistry"
                    component={biochemistry}
             />
-            <Route path="/bloodProductInformation"
+            <PrivateRoute path="/bloodProductInformation"
                    component={bloodProductInformation}
             />
-            <Route path="/bloodTransfusion"
+            <PrivateRoute path="/bloodTransfusion"
                    component={bloodTransfusion}
             />
-            <Route path="/clinicalPathways"
+            <PrivateRoute path="/clinicalPathways"
                    component={clinicalPathways}
             />
-            <Route path="/contacts"
+            <PrivateRoute path="/contacts"
                    component={contacts}
             />
-            <Route path="/generalInformation"
+            <PrivateRoute path="/generalInformation"
                    component={generalInformation}
             />
-            <Route path="/haematology"
+            <PrivateRoute path="/haematology"
                    component={haematology}
             />
-            <Route path="/quizhub"
+            <PrivateRoute path="/quizhub"
                    component={quizHub}
             />
-            <Route path="/usefulLinks"
+            <PrivateRoute path="/usefulLinks"
                    component={usefulLinks}
             />
-            <Route path="/tests/:testId"
+            <PrivateRoute path="/tests/:testId"
                    component={TestDetail}
             />
-            <Route path="/quizzes/:quizId"
+            <PrivateRoute path="/quizzes/:quizId"
                    component={QuizDetail}
             />
           </Switch>

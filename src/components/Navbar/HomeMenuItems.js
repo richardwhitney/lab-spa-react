@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Menu} from "semantic-ui-react";
+import {withRouter} from "react-router-dom";
 
 // Redux
 import {logoutUser} from "../../redux/actions/userActions";
@@ -32,4 +33,4 @@ const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated
 });
 
-export default connect(mapStateToProps, {logoutUser})(HomeMenuItems);
+export default connect(mapStateToProps, {logoutUser})(withRouter(HomeMenuItems));

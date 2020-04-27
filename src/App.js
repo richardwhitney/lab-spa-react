@@ -23,8 +23,9 @@ import generalInformation from './pages/generalInformation';
 import haematology from './pages/haematology';
 import quizHub from "./pages/quizHub";
 import usefulLinks from './pages/usefulLinks';
-import TestDetail from "./pages/testDetail";
-import QuizDetail from "./pages/quizDetail";
+import testDetail from "./pages/testDetail";
+import quizDetail from "./pages/quizDetail";
+import quizResults from "./pages/quizResults";
 // Components
 import Navbar from './components/Navbar/Navbar';
 import AuthRoute from './utils/AuthRoute';
@@ -96,10 +97,13 @@ class App extends Component {
                    component={usefulLinks}
             />
             <PrivateRoute path="/tests/:testId"
-                   component={TestDetail}
+                   component={testDetail}
             />
             <PrivateRoute path="/quizzes/:quizId"
-                   component={QuizDetail}
+                   component={quizDetail}
+            />
+            <PrivateRoute path="/quizresults"
+                          component={quizResults}
             />
           </Switch>
         </Router>

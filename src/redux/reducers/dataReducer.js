@@ -1,10 +1,11 @@
-import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ} from "../types";
+import {SET_TESTS, LOADING_DATA, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ, SET_QUIZ_RESULTS} from "../types";
 
 const initialState = {
   tests: [],
   test: {},
   quizzes: [],
   quiz: {},
+  quizResults: [],
   loading: false
 };
 
@@ -51,6 +52,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         quiz: action.payload,
+        loading: false
+      };
+    case SET_QUIZ_RESULTS:
+      return {
+        ...state,
+        quizResults: action.payload,
         loading: false
       };
     default:

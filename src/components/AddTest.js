@@ -63,7 +63,20 @@ class AddTest extends Component {
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ open: false, errors: {} });
+      this.setState({
+        open: false,
+        name: '',
+        department: '',
+        departmentId: '',
+        requestForm: '',
+        specimenType: '',
+        specimenContainer: '',
+        specimenVolume: '',
+        specimenRequirements: '',
+        turnaroundTime: '',
+        phoneAlertLimits: '',
+        specialNotes: '',
+        errors: {} });
     }
   }
 

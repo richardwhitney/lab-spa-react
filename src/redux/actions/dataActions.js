@@ -1,4 +1,17 @@
-import {SET_TESTS, LOADING_DATA, LOADING_UI, STOP_LOADING_UI, SET_ERRORS, CLEAR_ERRORS, ADD_TEST, SET_TEST, DELETE_TEST, SET_QUIZZES, SET_QUIZ } from '../types';
+import {
+  SET_TESTS,
+  LOADING_DATA,
+  LOADING_UI,
+  STOP_LOADING_UI,
+  SET_ERRORS,
+  CLEAR_ERRORS,
+  ADD_TEST,
+  SET_TEST,
+  DELETE_TEST,
+  SET_QUIZZES,
+  SET_QUIZ,
+  SET_QUIZ_RESULTS
+} from '../types';
 import axios from 'axios';
 
 // Get all tests
@@ -99,6 +112,23 @@ export const getQuiz = (quizId) => dispatch => {
       dispatch({ type: STOP_LOADING_UI });
     })
     .catch(error => console.log());
+};
+
+export const getQuizResults = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/quizResults')
+    .then(result => {
+      dispatch({
+        type: SET_QUIZ_RESULTS,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_QUIZ_RESULTS,
+        payload: []
+      })
+    })
 };
 
 export const clearErrors = () => dispatch => {

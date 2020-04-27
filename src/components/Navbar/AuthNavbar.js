@@ -5,6 +5,7 @@ import TestHubMenuItems from "./TestHubMenuItems";
 import TestDetailMenuItems from "./TestDetailMenuItems";
 import DefaultMenuItems from "./DefaultMenuItems";
 import QuizDetailMenuItems from "./QuizDetailMenuItems";
+import QuizHubMenuItems from "./QuizHubMenuItems";
 
 class AuthNavbar extends Component {
 
@@ -20,7 +21,10 @@ class AuthNavbar extends Component {
     else if (pathname.includes('/tests/')) {
       return <TestDetailMenuItems/>
     }
-    else if (pathname.includes('/quizzes/')) {
+    else if (pathname.includes('/quizhub')) {
+      return <QuizHubMenuItems/>
+    }
+    else if (pathname.includes('/quizzes/') || pathname.includes('/quizresults')) {
       return <QuizDetailMenuItems/>
     }
     else {

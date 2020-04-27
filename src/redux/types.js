@@ -18,3 +18,4 @@ export const DELETE_TEST = 'DELETE_TEST';
 export const ADD_TEST = 'ADD_TEST';
 export const SET_QUIZZES = 'SET_QUIZZES';
 export const SET_QUIZ = 'SET_QUIZ';
+export const SET_QUIZ_RESULTS = 'SET_QUIZ_RESULTS';

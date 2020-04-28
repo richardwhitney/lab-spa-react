@@ -3,6 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import {Menu} from "semantic-ui-react"
 
 import {connect} from 'react-redux';
+import AddQuizModal from "../AddQuiz/AddQuizModal";
 
 class QuizHubMenuItems extends Component {
 
@@ -24,6 +25,7 @@ class QuizHubMenuItems extends Component {
                 Results
               </Menu.Item>
             </Link>
+            <AddQuizModal/>
           </Menu.Menu>
         )}
       </Fragment>

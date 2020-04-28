@@ -51,5 +51,4 @@ DeleteTest.propTypes = {
   testId: PropTypes.string.isRequired
 };
 
-
 export default withRouter(connect(null, {deleteTest})(DeleteTest));

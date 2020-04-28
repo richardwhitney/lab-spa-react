@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Segment, Button, Header, Grid} from "semantic-ui-react";
+import {Segment, Button, Header, Grid, Container} from "semantic-ui-react";
 
 class Question extends  Component {
 
@@ -36,7 +36,7 @@ class Question extends  Component {
           {answered && <Button color='blue' size='large' onClick={this.resetQuestion}>Next</Button> }
           <Header as='h3'>{question.question}</Header>
         </Segment>
-        <Segment>
+        <Container>
           <Grid columns={1}>
 
             {question.options.map((option, index) => {
@@ -56,7 +56,7 @@ class Question extends  Component {
 
           </Grid>
 
-        </Segment>
+        </Container>
       </Fragment>
     )
   }

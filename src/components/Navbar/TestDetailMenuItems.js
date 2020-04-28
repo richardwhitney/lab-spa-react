@@ -21,7 +21,7 @@ class TestHubMenuItems extends Component {
   }
 
   render() {
-    const { admin } = this.props;
+    const { admin, test: { testId } } = this.props;
     return (
       <Fragment>
         <Menu.Menu position='left'>
@@ -34,7 +34,7 @@ class TestHubMenuItems extends Component {
         {admin && (
           <Menu.Menu position="right">
             <EditTest/>
-            <DeleteTest testId={this.props.test.testId}/>
+            <DeleteTest testId={testId}/>
           </Menu.Menu>
         )}
       </Fragment>

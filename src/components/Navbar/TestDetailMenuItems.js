@@ -3,11 +3,10 @@ import { Link, withRouter } from "react-router-dom";
 import { Menu, MenuItem } from "semantic-ui-react";
 
 // Redux
-import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import { deleteTest } from "../../redux/actions/dataActions";
 
 import EditTest from "../EditTest";
+import DeleteTest from "../DeleteTest";
 
 class TestHubMenuItems extends Component {
 
@@ -20,12 +19,6 @@ class TestHubMenuItems extends Component {
       console.log('Test state changed ' + this.props.test.testId);
     }
   }
-
-  handleDelete = (event) => {
-    event.preventDefault();
-    console.log("Menu item handle delete");
-    this.props.deleteTest(this.props.test.testId, this.props.history);
-  };
 
   render() {
     const { admin } = this.props;
@@ -41,9 +34,7 @@ class TestHubMenuItems extends Component {
         {admin && (
           <Menu.Menu position="right">
             <EditTest/>
-            <MenuItem onClick={this.handleDelete}>
-              Delete
-            </MenuItem>
+            <DeleteTest testId={this.props.test.testId}/>
           </Menu.Menu>
         )}
       </Fragment>
@@ -51,17 +42,10 @@ class TestHubMenuItems extends Component {
   }
 }
 
-TestHubMenuItems.propTypes = {
-  deleteTest: PropTypes.func.isRequired
-};
-
 const mapStateToProps = (state) => ({
   test: state.data.test,
   admin: state.user.credentials.admin
 });
 
-const mapActionsToProps = {
-  deleteTest
-};
 
-export default withRouter(connect(mapStateToProps, mapActionsToProps)(TestHubMenuItems));
+export default withRouter(connect(mapStateToProps)(TestHubMenuItems));

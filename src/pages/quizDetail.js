@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {Segment, Dimmer, Loader, Header, Button} from "semantic-ui-react";
 //Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getQuiz} from "../redux/actions/dataActions";
+import { getQuiz, addQuizResult} from "../redux/actions/dataActions";
 import Question from "../components/Question";
 
 class QuizDetail extends Component {
@@ -42,6 +42,15 @@ class QuizDetail extends Component {
     });
   };
 
+  submitQuiz = () => {
+    const newQuizResult = {
+      quizName: this.props.quiz.title,
+      score: this.state.score,
+      userEmail: this.props.email
+    };
+    this.props.addQuizResult(newQuizResult, this.props.history);
+  };
+
   render() {
     const { quiz: { title, description, questions }, UI: {loading}} = this.props;
     const { currentIndex, showFinished, score } = this.state;
@@ -68,7 +77,10 @@ class QuizDetail extends Component {
             </Segment>
           )}
           {showFinished ? (
-            <Button color='blue' size='large' onClick={this.resetQuiz}>Try again</Button>
+            <Fragment>
+              <Button color='blue' size='large' onClick={this.resetQuiz}>Try again</Button>
+              <Button color='green' size='large' onClick={this.submitQuiz}>Submit</Button>
+            </Fragment>
           ) : (
             <Segment>
               {console.log("Here")}
@@ -91,17 +103,20 @@ class QuizDetail extends Component {
 
 QuizDetail.propTypes = {
   getQuiz: PropTypes.func.isRequired,
+  addQuizResult: PropTypes.func.isRequired,
   quiz: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   quiz: state.data.quiz,
+  email: state.user.credentials.email,
   UI: state.UI
 });
 
 const mapActionsToProps = {
-  getQuiz
+  getQuiz,
+  addQuizResult
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(QuizDetail)

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Segment, Table, Header, Loader, Dimmer} from "semantic-ui-react";
+import dayjs from "dayjs";
 
 import {connect} from 'react-redux';
 import {getQuizResults} from "../redux/actions/dataActions";
@@ -19,7 +20,7 @@ class QuizResults extends Component{
           <Table.Cell>{result.userEmail}</Table.Cell>
           <Table.Cell>{result.quizName}</Table.Cell>
           <Table.Cell>{result.score}</Table.Cell>
-          <Table.Cell>{result.date}</Table.Cell>
+          <Table.Cell>{dayjs(result.createdOn).format('DD-MM-YYYY')}</Table.Cell>
         </Table.Row>
       )
     ) : (

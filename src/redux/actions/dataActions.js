@@ -10,7 +10,7 @@ import {
   DELETE_TEST,
   SET_QUIZZES,
   SET_QUIZ,
-  SET_QUIZ_RESULTS
+  SET_QUIZ_RESULTS, ADD_QUIZ_RESULT
 } from '../types';
 import axios from 'axios';
 
@@ -129,6 +129,19 @@ export const getQuizResults = () => dispatch => {
         payload: []
       })
     })
+};
+
+export const addQuizResult = (newQuizResult, history) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.post('/quizResults', newQuizResult)
+    .then(response => {
+      dispatch({
+        type: ADD_QUIZ_RESULT,
+        payload: response.data
+      });
+      history.push('/quizhub');
+    })
+    .catch(error => console.log(error));
 };
 
 export const clearErrors = () => dispatch => {

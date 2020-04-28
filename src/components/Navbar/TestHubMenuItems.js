@@ -10,7 +10,7 @@ class TestHubMenuItems extends Component {
 
 
   render() {
-    const { admin } = this.props
+    const { admin } = this.props;
     return (
       <Fragment>
         <Menu.Menu position='left'>

@@ -28,6 +28,7 @@ class TestHubMenuItems extends Component {
   };
 
   render() {
+    const { admin } = this.props;
     return (
       <Fragment>
         <Menu.Menu position='left'>
@@ -37,12 +38,14 @@ class TestHubMenuItems extends Component {
             </Menu.Item>
           </Link>
         </Menu.Menu>
-        <Menu.Menu position="right">
-          <EditTest/>
-          <MenuItem onClick={this.handleDelete}>
-            Delete
-          </MenuItem>
-        </Menu.Menu>
+        {admin && (
+          <Menu.Menu position="right">
+            <EditTest/>
+            <MenuItem onClick={this.handleDelete}>
+              Delete
+            </MenuItem>
+          </Menu.Menu>
+        )}
       </Fragment>
     )
   }
@@ -53,7 +56,8 @@ TestHubMenuItems.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  test: state.data.test
+  test: state.data.test,
+  admin: state.user.credentials.admin
 });
 
 const mapActionsToProps = {

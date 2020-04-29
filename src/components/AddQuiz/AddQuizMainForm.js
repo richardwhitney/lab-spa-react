@@ -3,6 +3,10 @@ import AddQuizNameForm from "./AddQuizNameForm";
 import AddQuizQuestionFrom from "./AddQuizQuestionFrom";
 import AddQuizConfirmation from "./AddQuizConfirmation";
 
+import { connect } from 'react-redux';
+import { addQuiz, clearErrors } from "../../redux/actions/dataActions";
+import PropTypes from 'prop-types';
+
 class AddQuizMainForm extends Component {
 
   state = {
@@ -62,6 +66,16 @@ class AddQuizMainForm extends Component {
     }));
   };
 
+  addQuiz = () => {
+    this.props.clearErrors();
+    const newQuiz = {
+      quizName: this.state.quizName,
+      quizDescription: this.state.quizDescription,
+      questions: this.state.questions
+    };
+    this.props.addQuiz(newQuiz);
+  };
+
   render() {
     const { step, quizName, quizDescription, question, answer, options, questions } = this.state;
     const quizValues = { quizName, quizDescription};
@@ -84,6 +98,7 @@ class AddQuizMainForm extends Component {
               />;
       case 3:
         return <AddQuizConfirmation prevStep={this.prevStep}
+                                    handleAddQuiz={this.addQuiz}
                                     values={confirmationValues}
               />;
       default:
@@ -92,4 +107,10 @@ class AddQuizMainForm extends Component {
   }
 }
 
-export default AddQuizMainForm;
+AddQuizMainForm.propTypes = {
+  addQuiz: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
+};
+
+
+export default connect(null, {addQuiz, clearErrors})(AddQuizMainForm);

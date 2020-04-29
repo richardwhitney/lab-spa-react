@@ -3,10 +3,11 @@ import React, {Component} from "react";
 // Semantic-UI
 import {Modal, MenuItem} from "semantic-ui-react";
 import AddQuizMainForm from "./AddQuizMainForm";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 class AddQuizModal extends Component {
   state = {
-
     open: false
   };
 
@@ -17,6 +18,17 @@ class AddQuizModal extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    if (nextProps.UI.errors) {
+      this.setState({
+        errors: nextProps.UI.errors
+      });
+    }
+    if (!nextProps.UI.errors && !nextProps.UI.loading) {
+      this.setState({ open: false });
+    }
+  }
 
   render() {
     return (
@@ -34,4 +46,12 @@ class AddQuizModal extends Component {
   };
 }
 
-export default AddQuizModal;
+AddQuizModal.propTypes = {
+  UI: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  UI: state.UI
+});
+
+export default connect(mapStateToProps)(AddQuizModal);

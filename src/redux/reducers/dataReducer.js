@@ -7,7 +7,7 @@ import {
   SET_QUIZZES,
   SET_QUIZ,
   SET_QUIZ_RESULTS,
-  ADD_QUIZ_RESULT
+  ADD_QUIZ_RESULT, ADD_QUIZ
 } from "../types";
 
 const initialState = {
@@ -76,6 +76,14 @@ export default function (state = initialState, action) {
         quizResults: [
           action.payload,
           ...state.quizResults
+        ]
+      };
+    case ADD_QUIZ:
+      return {
+        ...state,
+        quizzes: [
+          action.payload,
+          ...state.quizzes
         ]
       };
     default:

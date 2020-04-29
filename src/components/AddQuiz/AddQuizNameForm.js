@@ -6,7 +6,7 @@ class AddQuizNameForm extends Component {
   saveAndContinue = (e) => {
     e.preventDefault();
     this.props.nextStep();
-  }
+  };
 
   render() {
     const { values } = this.props;
@@ -15,13 +15,15 @@ class AddQuizNameForm extends Component {
         <Header as='h4'>Quiz Details</Header>
         <Form.Input label='Name'
                     placeholder='Quiz name'
-                    onChange={this.props.handleChange('quizName')}
-                    defaultValue={values.quizName}
+                    onChange={this.props.handleChange}
+                    name='quizName'
+                    value={values.quizName}
         />
         <Form.Input label='Description'
                     placeholder='Quiz description'
-                    onChange={this.props.handleChange('quizDescription')}
-                    defaultValue={values.quizDescription}
+                    name='quizDescription'
+                    onChange={this.props.handleChange}
+                    value={values.quizDescription}
         />
         <Button onClick={this.saveAndContinue}>Save And Continue</Button>
       </Form>

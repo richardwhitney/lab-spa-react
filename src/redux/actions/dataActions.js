@@ -10,7 +10,14 @@ import {
   DELETE_TEST,
   SET_QUIZZES,
   SET_QUIZ,
-  SET_QUIZ_RESULTS, ADD_QUIZ_RESULT, ADD_QUIZ, SET_BLOOD_PRODUCTS, ADD_BLOOD_PRODUCT, SET_BLOOD_PRODUCT, DELETE_BLOOD_PRODUCT
+  SET_QUIZ_RESULTS,
+  ADD_QUIZ_RESULT,
+  ADD_QUIZ,
+  SET_BLOOD_PRODUCTS,
+  ADD_BLOOD_PRODUCT,
+  SET_BLOOD_PRODUCT,
+  DELETE_BLOOD_PRODUCT,
+  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT
 } from '../types';
 import axios from 'axios';
 
@@ -227,6 +234,73 @@ export const deleteBloodProduct = (productId, history) => dispatch => {
       dispatch({ type: DELETE_BLOOD_PRODUCT, payload: productId });
       dispatch({ type: STOP_LOADING_UI });
       history.push('/bloodProductInformation');
+    })
+    .catch(error => console.log(error));
+};
+
+export const getContacts = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/contacts')
+    .then(result => {
+      dispatch({
+        type: SET_CONTACTS,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_CONTACTS,
+        payload: []
+      })
+    })
+};
+
+export const addContact = (newContact) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.post('/contact', newContact)
+    .then(response => {
+      dispatch({
+        type: ADD_CONTACT,
+        payload: response.data
+      });
+      dispatch({ type: CLEAR_ERRORS});
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response.data
+      });
+    });
+};
+
+export const getContact = (contactId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/contacts/${contactId}`)
+    .then(response => {
+      dispatch({
+        type: SET_CONTACT,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log());
+};
+
+export const editContact = (updatedContact, contactId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.put(`contact/${contactId}`, updatedContact)
+    .then(() => {
+      dispatch(getContact(contactId));
+    })
+    .catch(error => console.log(error));
+};
+
+export const deleteContact = (contactId) => dispatch => {
+  dispatch({ type: LOADING_UI});
+  axios.delete(`/contact/${contactId}`)
+    .then(() => {
+      dispatch({ type: DELETE_CONTACT, payload: contactId });
+      dispatch({ type: STOP_LOADING_UI });
     })
     .catch(error => console.log(error));
 };

@@ -7,7 +7,13 @@ import {
   SET_QUIZZES,
   SET_QUIZ,
   SET_QUIZ_RESULTS,
-  ADD_QUIZ_RESULT, ADD_QUIZ, SET_BLOOD_PRODUCTS, ADD_BLOOD_PRODUCT, SET_BLOOD_PRODUCT, DELETE_BLOOD_PRODUCT
+  ADD_QUIZ_RESULT,
+  ADD_QUIZ,
+  SET_BLOOD_PRODUCTS,
+  ADD_BLOOD_PRODUCT,
+  SET_BLOOD_PRODUCT,
+  DELETE_BLOOD_PRODUCT,
+  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT
 } from "../types";
 
 const initialState = {
@@ -18,6 +24,8 @@ const initialState = {
   quizResults: [],
   bloodProducts: [],
   bloodProduct: {},
+  contacts: [],
+  contact: {},
   loading: false
 };
 
@@ -113,6 +121,35 @@ export default function (state = initialState, action) {
       state.bloodProducts.splice(productIndex, 1);
       return {
         ...state
+      };
+    case SET_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
+        loading: false
+      };
+    case ADD_CONTACT:
+      return {
+        ...state,
+        contacts: [
+          action.payload,
+          ...state.contacts
+        ]
+      };
+    case SET_CONTACT:
+      return {
+        ...state,
+        contact: action.payload,
+        loading: false
+      };
+    case DELETE_CONTACT:
+      let contactIndex = state.contacts.findIndex(contact => contact.contactId === action.payload);
+      state.contacts.splice(contactIndex, 1);
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts
+        ]
       };
     default:
       return state;

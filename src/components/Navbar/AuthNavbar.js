@@ -8,6 +8,7 @@ import QuizDetailMenuItems from "./QuizDetailMenuItems";
 import QuizHubMenuItems from "./QuizHubMenuItems";
 import BloodProductHubMenuItems from "./BloodProductHubMenuItems";
 import BloodProductDetailMenuItems from "./BloodProductDetailMenuItems";
+import ContactsMenuItems from "./ContactsMenuItems";
 
 class AuthNavbar extends Component {
 
@@ -34,6 +35,9 @@ class AuthNavbar extends Component {
     }
     else if (pathname.includes('/bloodProducts/')) {
       return <BloodProductDetailMenuItems/>
+    }
+    else if (pathname.includes('/contacts')) {
+      return <ContactsMenuItems/>
     }
     else {
       return <DefaultMenuItems/>

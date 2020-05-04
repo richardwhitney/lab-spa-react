@@ -18,7 +18,7 @@ class DeleteBloodProduct extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-  }
+  };
 
   deleteBloodProduct = () => {
     this.props.deleteBloodProduct(this.props.productId, this.props.history);

@@ -12,12 +12,6 @@ class BloodProductSearchBar extends Component {
     this.handleChange(e, 'name', e.target.value);
   };
 
-  handleDepartmentChange = (event, result) => {
-    const { value } = result;
-    console.log(`Select change ${value}`);
-    this.handleChange(event, 'department', value);
-  };
-
   render() {
     return (
       <Segment>
@@ -31,9 +25,5 @@ class BloodProductSearchBar extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  data: state.data
-});
 
 export default BloodProductSearchBar;

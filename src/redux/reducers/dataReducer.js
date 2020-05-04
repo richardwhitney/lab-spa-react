@@ -7,7 +7,7 @@ import {
   SET_QUIZZES,
   SET_QUIZ,
   SET_QUIZ_RESULTS,
-  ADD_QUIZ_RESULT, ADD_QUIZ
+  ADD_QUIZ_RESULT, ADD_QUIZ, SET_BLOOD_PRODUCTS, ADD_BLOOD_PRODUCT, SET_BLOOD_PRODUCT, DELETE_BLOOD_PRODUCT
 } from "../types";
 
 const initialState = {
@@ -16,6 +16,8 @@ const initialState = {
   quizzes: [],
   quiz: {},
   quizResults: [],
+  bloodProducts: [],
+  bloodProduct: {},
   loading: false
 };
 
@@ -47,8 +49,8 @@ export default function (state = initialState, action) {
         loading: false
       };
     case DELETE_TEST:
-      let index = state.tests.findIndex(test => test.testId === action.payload);
-      state.tests.splice(index, 1);
+      let testIndex = state.tests.findIndex(test => test.testId === action.payload);
+      state.tests.splice(testIndex, 1);
       return {
         ...state
       };
@@ -85,6 +87,32 @@ export default function (state = initialState, action) {
           action.payload,
           ...state.quizzes
         ]
+      };
+    case SET_BLOOD_PRODUCTS:
+      return {
+        ...state,
+        bloodProducts: action.payload,
+        loading: false
+      };
+    case ADD_BLOOD_PRODUCT:
+      return {
+        ...state,
+        bloodProducts: [
+          action.payload,
+          ...state.bloodProducts
+        ]
+      };
+    case SET_BLOOD_PRODUCT:
+      return {
+        ...state,
+        bloodProduct: action.payload,
+        loading: false
+      };
+    case DELETE_BLOOD_PRODUCT:
+      let productIndex = state.bloodProducts.findIndex(bloodProduct => bloodProduct.productId === action.payload);
+      state.bloodProducts.splice(productIndex, 1);
+      return {
+        ...state
       };
     default:
       return state;

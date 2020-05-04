@@ -10,7 +10,7 @@ import {
   DELETE_TEST,
   SET_QUIZZES,
   SET_QUIZ,
-  SET_QUIZ_RESULTS, ADD_QUIZ_RESULT, ADD_QUIZ
+  SET_QUIZ_RESULTS, ADD_QUIZ_RESULT, ADD_QUIZ, SET_BLOOD_PRODUCTS, ADD_BLOOD_PRODUCT, SET_BLOOD_PRODUCT, DELETE_BLOOD_PRODUCT
 } from '../types';
 import axios from 'axios';
 
@@ -160,6 +160,75 @@ export const addQuiz = (newQuiz) => (dispatch) => {
         payload: error.response.data
       });
     });
+};
+
+export const getBloodProducts = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/bloodProducts')
+    .then(result => {
+      dispatch({
+        type: SET_BLOOD_PRODUCTS,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_BLOOD_PRODUCTS,
+        payload: []
+      })
+    })
+};
+
+// Add a blood product
+export const addBloodProduct = (newBloodProduct) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.post('/bloodProduct', newBloodProduct)
+    .then(response => {
+      dispatch({
+        type: ADD_BLOOD_PRODUCT,
+        payload: response.data
+      });
+      dispatch({ type: CLEAR_ERRORS});
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response.data
+      });
+    });
+};
+
+export const getBloodProduct = (productId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/bloodProducts/${productId}`)
+    .then(response => {
+      dispatch({
+        type: SET_BLOOD_PRODUCT,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log());
+};
+
+export const editBloodProduct = (updatedBloodProduct, productId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.put(`bloodProduct/${productId}`, updatedBloodProduct)
+    .then(() => {
+      dispatch(getBloodProduct(productId));
+    })
+    .catch(error => console.log(error));
+};
+
+export const deleteBloodProduct = (productId, history) => dispatch => {
+  dispatch({ type: LOADING_UI});
+  axios.delete(`/bloodProduct/${productId}`)
+    .then(() => {
+      dispatch({ type: DELETE_BLOOD_PRODUCT, payload: productId });
+      dispatch({ type: STOP_LOADING_UI });
+      history.push('/bloodProductInformation');
+    })
+    .catch(error => console.log(error));
 };
 
 export const clearErrors = () => dispatch => {

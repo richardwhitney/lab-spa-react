@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Menu, MenuItem } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 
 // Redux
 import {connect} from "react-redux";

@@ -16,6 +16,7 @@ import home from './pages/home';
 import testHub from "./pages/testHub";
 import biochemistry from './pages/biochemistry';
 import bloodProductInformation from './pages/bloodProductInformation';
+import bloodProductDetail from "./pages/bloodProductDetail";
 import bloodTransfusion from './pages/bloodTransfusion';
 import clinicalPathways from './pages/clinicalPathways';
 import contacts from './pages/contacts';
@@ -74,6 +75,9 @@ class App extends Component {
             />
             <PrivateRoute path="/bloodProductInformation"
                    component={bloodProductInformation}
+            />
+            <PrivateRoute path="/bloodProducts/:productId"
+                          component={bloodProductDetail}
             />
             <PrivateRoute path="/bloodTransfusion"
                    component={bloodTransfusion}

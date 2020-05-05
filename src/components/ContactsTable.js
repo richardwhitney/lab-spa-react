@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import {Segment, Table, Header, Loader, Dimmer} from "semantic-ui-react";
+import {Container, Table, Header, Loader, Dimmer} from "semantic-ui-react";
 
 import {connect} from 'react-redux';
 import {editContact, deleteContact} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
 import DeleteContact from "./DeleteContact";
+import EditContact from "./EditContact";
 
 class ContactsTable extends Component {
 
@@ -17,7 +18,10 @@ class ContactsTable extends Component {
         <Table.Cell>{result.phone}</Table.Cell>
         <Table.Cell>{result.department}</Table.Cell>
         {admin && (
-          <Table.Cell>Edit <DeleteContact contactId={result.contactId}/></Table.Cell>
+          <Table.Cell>
+            <EditContact contact={result}/>
+            <DeleteContact contactId={result.contactId}/>
+          </Table.Cell>
         )}
       </Table.Row>
       )

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Modal, Button, Header} from "semantic-ui-react";
-import { withRouter} from "react-router-dom";
 
 import { connect } from 'react-redux';
 import { deleteContact } from "../redux/actions/dataActions";
@@ -22,13 +21,14 @@ class DeleteContact extends Component{
 
   deleteContact = () => {
     this.props.deleteContact(this.props.contactId);
-    this.setState({ open: false });
+    //this.setState({ open: false });
   };
 
   render() {
+    const { loading } = this.props;
     return (
       <Modal
-        trigger={<Button color='red' onClick={this.handleOpen}>Delete</Button>}
+        trigger={<Button color='red' onClick={this.handleOpen} floated='right'>Delete</Button>}
         open={this.state.open}
         onClose={this.handleClose}
       >
@@ -47,7 +47,12 @@ class DeleteContact extends Component{
 
 DeleteContact.propTypes = {
   deleteContact: PropTypes.func.isRequired,
-  contactId: PropTypes.string.isRequired
+  contactId: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
-export default withRouter(connect(null, {deleteContact})(DeleteContact));
+const mapStateToProps = (state) => ({
+  loading: state.UI.loading
+});
+
+export default connect(mapStateToProps, {deleteContact})(DeleteContact);

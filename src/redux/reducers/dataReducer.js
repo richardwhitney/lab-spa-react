@@ -13,7 +13,7 @@ import {
   ADD_BLOOD_PRODUCT,
   SET_BLOOD_PRODUCT,
   DELETE_BLOOD_PRODUCT,
-  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT
+  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT, SET_MARKDOWN
 } from "../types";
 
 const initialState = {
@@ -26,6 +26,7 @@ const initialState = {
   bloodProduct: {},
   contacts: [],
   contact: {},
+  markdown: {},
   loading: false
 };
 
@@ -150,6 +151,12 @@ export default function (state = initialState, action) {
         contacts: [
           ...state.contacts
         ]
+      };
+    case SET_MARKDOWN:
+      return {
+        ...state,
+        markdown: action.payload,
+        loading: false
       };
     default:
       return state;

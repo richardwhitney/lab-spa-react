@@ -9,6 +9,7 @@ import QuizHubMenuItems from "./QuizHubMenuItems";
 import BloodProductHubMenuItems from "./BloodProductHubMenuItems";
 import BloodProductDetailMenuItems from "./BloodProductDetailMenuItems";
 import ContactsMenuItems from "./ContactsMenuItems";
+import MarkdownMenuItems from "./MarkdownMenuItems";
 
 class AuthNavbar extends Component {
 
@@ -38,6 +39,9 @@ class AuthNavbar extends Component {
     }
     else if (pathname.includes('/contacts')) {
       return <ContactsMenuItems/>
+    }
+    else if (pathname.includes('/bloodTransfusion') || pathname.includes('/biochemistry') || pathname.includes('/haematology')) {
+      return <MarkdownMenuItems/>
     }
     else {
       return <DefaultMenuItems/>

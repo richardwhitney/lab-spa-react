@@ -27,12 +27,11 @@ import usefulLinks from './pages/usefulLinks';
 import testDetail from "./pages/testDetail";
 import quizDetail from "./pages/quizDetail";
 import quizResults from "./pages/quizResults";
+import editMarkdown from "./pages/editMarkdown";
 // Components
 import Navbar from './components/Navbar/Navbar';
 import AuthRoute from './utils/AuthRoute';
 import PrivateRoute from "./utils/PrivateRoute";
-
-
 
 axios.defaults.baseURL = 'https://europe-west1-lab-fyp-rw.cloudfunctions.net/api';
 
@@ -108,6 +107,9 @@ class App extends Component {
             />
             <PrivateRoute path="/quizresults"
                           component={quizResults}
+            />
+            <PrivateRoute path="/editMarkdown"
+                          component={editMarkdown}
             />
           </Switch>
         </Router>

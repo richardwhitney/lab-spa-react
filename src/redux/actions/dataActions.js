@@ -17,7 +17,7 @@ import {
   ADD_BLOOD_PRODUCT,
   SET_BLOOD_PRODUCT,
   DELETE_BLOOD_PRODUCT,
-  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT
+  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT, SET_MARKDOWN
 } from '../types';
 import axios from 'axios';
 
@@ -283,7 +283,7 @@ export const getContact = (contactId) => dispatch => {
       });
       dispatch({ type: STOP_LOADING_UI });
     })
-    .catch(error => console.log());
+    .catch(error => console.log(error));
 };
 
 export const editContact = (updatedContact, contactId) => (dispatch) => {
@@ -301,6 +301,28 @@ export const deleteContact = (contactId) => dispatch => {
     .then(() => {
       dispatch({ type: DELETE_CONTACT, payload: contactId });
       dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log(error));
+};
+
+export const getMarkdown = (markdownId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/markdown/${markdownId}`)
+    .then(response => {
+      dispatch({
+        type: SET_MARKDOWN,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log(error));
+};
+
+export const editMarkdown = (updatedMarkdown, markdownId, history) => (dispatch) => {
+  dispatch({type: LOADING_UI});
+  axios.put(`markdown/${markdownId}`, updatedMarkdown)
+    .then(() => {
+      history.goBack();
     })
     .catch(error => console.log(error));
 };

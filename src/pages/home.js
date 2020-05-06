@@ -88,12 +88,12 @@ class Home extends Component{
           </Grid.Column>
           <Grid.Column>
             <Segment as={Link}
-                     to={'/generalInformation'}
+                     to={'/news'}
                      inverted color='violet'
                      padded style={{marginTop: '1em'}}
                      size='massive'
             >
-              General Information
+              News Feed
             </Segment>
           </Grid.Column>
           <Grid.Column>

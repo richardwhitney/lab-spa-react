@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class UsefulLinks extends Component{
+class News extends Component{
   render() {
     return (
       <div style={{ marginTop: '7em'}}>
@@ -10,4 +10,4 @@ class UsefulLinks extends Component{
   }
 }
 
-export default UsefulLinks
+export default News

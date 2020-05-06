@@ -30,3 +30,7 @@ export const SET_CONTACT = 'SET_CONTACT';
 export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const SET_MARKDOWN = 'SET_MARKDOWN';
+export const SET_NEWS_ITEMS = 'SET_NEWS_ITEMS';
+export const SET_NEWS_ITEM = 'SET_NEWS_ITEM';
+export const DELETE_NEWS_ITEM = 'DELETE_NEWS_ITEM';
+export const ADD_NEWS_ITEM = 'ADD_NEWS_ITEM';

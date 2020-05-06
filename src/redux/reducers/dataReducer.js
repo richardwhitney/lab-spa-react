@@ -13,7 +13,15 @@ import {
   ADD_BLOOD_PRODUCT,
   SET_BLOOD_PRODUCT,
   DELETE_BLOOD_PRODUCT,
-  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT, SET_MARKDOWN
+  SET_CONTACTS,
+  ADD_CONTACT,
+  SET_CONTACT,
+  DELETE_CONTACT,
+  SET_MARKDOWN,
+  SET_NEWS_ITEMS,
+  ADD_NEWS_ITEM,
+  SET_NEWS_ITEM,
+  DELETE_NEWS_ITEM
 } from "../types";
 
 const initialState = {
@@ -27,6 +35,8 @@ const initialState = {
   contacts: [],
   contact: {},
   markdown: {},
+  newsItems: [],
+  newsItem: {},
   loading: false
 };
 
@@ -157,6 +167,35 @@ export default function (state = initialState, action) {
         ...state,
         markdown: action.payload,
         loading: false
+      };
+    case SET_NEWS_ITEMS:
+      return {
+        ...state,
+        newsItems: action.payload,
+        loading: false
+      };
+    case ADD_NEWS_ITEM:
+      return {
+        ...state,
+        newsItems: [
+          action.payload,
+          ...state.newsItems
+        ]
+      };
+    case SET_NEWS_ITEM:
+      return {
+        ...state,
+        newsItem: action.payload,
+        loading: false
+      };
+    case DELETE_NEWS_ITEM:
+      let newsItemIndex = state.contacts.findIndex(newsItem => newsItem.newsItemId === action.payload);
+      state.newsItems.splice(newsItemIndex, 1);
+      return {
+        ...state,
+        newsItems: [
+          ...state.newsItems
+        ]
       };
     default:
       return state;

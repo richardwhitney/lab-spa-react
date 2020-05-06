@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Segment, Header} from "semantic-ui-react";
+import {Segment, Header, Container} from "semantic-ui-react";
 import {connect} from 'react-redux';
 import {getContacts} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
@@ -15,10 +15,12 @@ class Contacts extends Component {
   render() {
     const {contacts} = this.props.data;
     return (
-      <Segment style={{ marginTop: '7em'}}>
-        <Header as='h3'>Contacts</Header>
-        <ContactsTable contacts={contacts}/>
-      </Segment>
+      <Container>
+        <Segment style={{ marginTop: '7em'}}>
+          <Header as='h3'>Contacts</Header>
+          <ContactsTable contacts={contacts}/>
+        </Segment>
+      </Container>
     )
   }
 }

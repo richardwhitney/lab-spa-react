@@ -17,7 +17,15 @@ import {
   ADD_BLOOD_PRODUCT,
   SET_BLOOD_PRODUCT,
   DELETE_BLOOD_PRODUCT,
-  SET_CONTACTS, ADD_CONTACT, SET_CONTACT, DELETE_CONTACT, SET_MARKDOWN
+  SET_CONTACTS,
+  ADD_CONTACT,
+  SET_CONTACT,
+  DELETE_CONTACT,
+  SET_MARKDOWN,
+  SET_NEWS_ITEMS,
+  ADD_NEWS_ITEM,
+  SET_NEWS_ITEM,
+  DELETE_NEWS_ITEM
 } from '../types';
 import axios from 'axios';
 
@@ -329,4 +337,71 @@ export const editMarkdown = (updatedMarkdown, markdownId, history) => (dispatch)
 
 export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
+};
+
+export const getNewsItems = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/newsItems')
+    .then(result => {
+      dispatch({
+        type: SET_NEWS_ITEMS,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_NEWS_ITEMS,
+        payload: []
+      })
+    })
+};
+
+export const addNewsItem = (newNewsItem) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.post('/newsItems', newNewsItem)
+    .then(response => {
+      dispatch({
+        type: ADD_NEWS_ITEM,
+        payload: response.data
+      });
+      dispatch({ type: CLEAR_ERRORS});
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: error.response.data
+      });
+    });
+};
+
+export const getNewsItem = (newsItemId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/newsItems/${newsItemId}`)
+    .then(response => {
+      dispatch({
+        type: SET_NEWS_ITEM,
+        payload: response.data
+      });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log(error));
+};
+
+export const editNewsItem = (updatedNewsItem, newsItemId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.put(`newsItem/${newsItemId}`, updatedNewsItem)
+    .then(() => {
+      dispatch(getNewsItem(newsItemId));
+    })
+    .catch(error => console.log(error));
+};
+
+export const deleteNewsItem = (newsItemId) => dispatch => {
+  dispatch({ type: LOADING_UI});
+  axios.delete(`/newsItem/${newsItemId}`)
+    .then(() => {
+      dispatch({ type: DELETE_NEWS_ITEM, payload: newsItemId });
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log(error));
 };

@@ -23,7 +23,7 @@ import contacts from './pages/contacts';
 import generalInformation from './pages/generalInformation';
 import haematology from './pages/haematology';
 import quizHub from "./pages/quizHub";
-import usefulLinks from './pages/usefulLinks';
+import news from './pages/news';
 import testDetail from "./pages/testDetail";
 import quizDetail from "./pages/quizDetail";
 import quizResults from "./pages/quizResults";
@@ -96,8 +96,8 @@ class App extends Component {
             <PrivateRoute path="/quizhub"
                    component={quizHub}
             />
-            <PrivateRoute path="/usefulLinks"
-                   component={usefulLinks}
+            <PrivateRoute path="/news"
+                   component={news}
             />
             <PrivateRoute path="/tests/:testId"
                    component={testDetail}

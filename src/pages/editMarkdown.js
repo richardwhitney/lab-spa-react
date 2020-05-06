@@ -64,7 +64,7 @@ class EditMarkdown extends Component {
           </Grid.Column>
           <Grid.Column>
             <Container>
-              <Segment>
+              <Segment style={{overflow: 'auto', maxHeight: 1150 }}>
                 <ReactMarkdown source={this.state.body}/>
               </Segment>
             </Container>

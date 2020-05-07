@@ -358,7 +358,7 @@ export const getNewsItems = () => dispatch => {
 
 export const addNewsItem = (newNewsItem) => (dispatch) => {
   dispatch({ type: LOADING_UI });
-  axios.post('/newsItems', newNewsItem)
+  axios.post('/newsItem', newNewsItem)
     .then(response => {
       dispatch({
         type: ADD_NEWS_ITEM,

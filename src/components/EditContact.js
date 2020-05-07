@@ -55,11 +55,11 @@ class EditContact extends Component {
     this.props.clearErrors();
     this.setState({ errors: {} });
     const updatedContact = {
-      name: '',
-      phone: '',
-      department: ''
+      name: this.state.name,
+      phone: this.state.phone,
+      department: this.state.department
     };
-    this.props.editTest(updatedContact, this.props.contact.contactId);
+    this.props.editContact(updatedContact, this.props.contact.contactId);
   };
 
   render() {

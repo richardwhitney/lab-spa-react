@@ -10,6 +10,7 @@ import BloodProductHubMenuItems from "./BloodProductHubMenuItems";
 import BloodProductDetailMenuItems from "./BloodProductDetailMenuItems";
 import ContactsMenuItems from "./ContactsMenuItems";
 import MarkdownMenuItems from "./MarkdownMenuItems";
+import NewsHubMenuItems from "./NewsHubMenuItems";
 
 class AuthNavbar extends Component {
 
@@ -42,6 +43,9 @@ class AuthNavbar extends Component {
     }
     else if (pathname.includes('/bloodTransfusion') || pathname.includes('/biochemistry') || pathname.includes('/haematology')) {
       return <MarkdownMenuItems/>
+    }
+    else if (pathname.includes('/news')) {
+      return <NewsHubMenuItems/>
     }
     else {
       return <DefaultMenuItems/>

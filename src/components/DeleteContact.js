@@ -25,7 +25,6 @@ class DeleteContact extends Component{
   };
 
   render() {
-    const { loading } = this.props;
     return (
       <Modal
         trigger={<Button color='red' onClick={this.handleOpen} floated='right'>Delete</Button>}
@@ -47,12 +46,7 @@ class DeleteContact extends Component{
 
 DeleteContact.propTypes = {
   deleteContact: PropTypes.func.isRequired,
-  contactId: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired
+  contactId: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.UI.loading
-});
-
-export default connect(mapStateToProps, {deleteContact})(DeleteContact);
+export default connect(null, {deleteContact})(DeleteContact);

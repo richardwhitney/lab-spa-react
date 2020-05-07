@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Loader, Dimmer, Header, Container} from "semantic-ui-react";
+import {Card, Loader, Dimmer, Container} from "semantic-ui-react";
 import {connect} from 'react-redux';
 import {getNewsItems} from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';

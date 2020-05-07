@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Container, Table, Header, Loader, Dimmer} from "semantic-ui-react";
+import {Table, Loader, Dimmer} from "semantic-ui-react";
 
 import {connect} from 'react-redux';
 import {editContact, deleteContact} from "../redux/actions/dataActions";

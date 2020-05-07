@@ -21,7 +21,7 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM
+  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT
 } from "../types";
 
 const initialState = {
@@ -162,6 +162,16 @@ export default function (state = initialState, action) {
           ...state.contacts
         ]
       };
+    case EDIT_CONTACT:
+      let editContactIndex = state.contacts.findIndex(contact => contact.contactId === action.payload.contactId);
+      return {
+        ...state,
+        contacts: [
+          ...state.contacts.slice(0, editContactIndex),
+          action.payload,
+          ...state.contacts.slice(editContactIndex + 1)
+        ]
+      };
     case SET_MARKDOWN:
       return {
         ...state,
@@ -195,6 +205,16 @@ export default function (state = initialState, action) {
         ...state,
         newsItems: [
           ...state.newsItems
+        ]
+      };
+    case EDIT_NEWS_ITEM:
+      let editItemIndex = state.newsItems.findIndex(newsItem => newsItem.newsItemId === action.payload.newsItemId);
+      return {
+        ...state,
+        newsItems: [
+          ...state.newsItems.slice(0, editItemIndex),
+          action.payload,
+          ...state.newsItems.slice(editItemIndex + 1)
         ]
       };
     default:

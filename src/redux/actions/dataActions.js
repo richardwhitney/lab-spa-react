@@ -25,7 +25,7 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM
+  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT
 } from '../types';
 import axios from 'axios';
 
@@ -298,7 +298,13 @@ export const editContact = (updatedContact, contactId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios.put(`contact/${contactId}`, updatedContact)
     .then(() => {
-      dispatch(getContact(contactId));
+      const responseContact = updatedContact;
+      responseContact.contactId = contactId;
+      dispatch({
+        type: EDIT_CONTACT,
+        payload: responseContact
+      });
+      dispatch({type: STOP_LOADING_UI});
     })
     .catch(error => console.log(error));
 };
@@ -391,7 +397,13 @@ export const editNewsItem = (updatedNewsItem, newsItemId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios.put(`newsItem/${newsItemId}`, updatedNewsItem)
     .then(() => {
-      dispatch(getNewsItem(newsItemId));
+      const responseNewsItem = updatedNewsItem;
+      responseNewsItem.newsItemId = newsItemId;
+      dispatch({
+        type: EDIT_NEWS_ITEM,
+        payload: responseNewsItem
+      });
+      dispatch({type: STOP_LOADING_UI});
     })
     .catch(error => console.log(error));
 };

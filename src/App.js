@@ -18,7 +18,8 @@ import biochemistry from './pages/biochemistry';
 import bloodProductInformation from './pages/bloodProductInformation';
 import bloodProductDetail from "./pages/bloodProductDetail";
 import bloodTransfusion from './pages/bloodTransfusion';
-import clinicalPathways from './pages/clinicalPathways';
+import clinicalPathwaysHub from './pages/clinicalPathwaysHub';
+import clinicalPathwayDetail from "./pages/clinicalPathwayDetail";
 import contacts from './pages/contacts';
 import generalInformation from './pages/generalInformation';
 import haematology from './pages/haematology';
@@ -82,8 +83,11 @@ class App extends Component {
             <PrivateRoute path="/bloodTransfusion"
                    component={bloodTransfusion}
             />
-            <PrivateRoute path="/clinicalPathways"
-                   component={clinicalPathways}
+            <PrivateRoute path="/clinicalPathwaysHub"
+                   component={clinicalPathwaysHub}
+            />
+            <PrivateRoute path="/clinicalPathways/:clinicalPathwayId"
+                          component={clinicalPathwayDetail}
             />
             <PrivateRoute path="/contacts"
                    component={contacts}

@@ -25,7 +25,7 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT
+  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT, SET_CLINICAL_PATHWAYS, SET_CLINICAL_PATHWAY, SET_NODE
 } from '../types';
 import axios from 'axios';
 
@@ -417,3 +417,45 @@ export const deleteNewsItem = (newsItemId) => dispatch => {
     })
     .catch(error => console.log(error));
 };
+export const getClinicalPathways = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios.get('/clinicalPathways')
+    .then(result => {
+      dispatch({
+        type: SET_CLINICAL_PATHWAYS,
+        payload: result.data
+      })
+    })
+    .catch(error => {
+      dispatch({
+        type: SET_CLINICAL_PATHWAYS,
+        payload: []
+      })
+    })
+};
+
+export const getClinicalPathway = (clinicalPathwayId) => dispatch => {
+  dispatch({ type: LOADING_UI });
+  axios.get(`/clinicalPathways/${clinicalPathwayId}`)
+    .then(response => {
+      dispatch({
+        type: SET_CLINICAL_PATHWAY,
+        payload: response.data
+      });
+
+      dispatch({ type: STOP_LOADING_UI });
+    })
+    .catch(error => console.log(error));
+};
+
+export const getNode = (nodeId) => dispatch => {
+  dispatch({type: LOADING_UI});
+  dispatch({
+    type: SET_NODE,
+    payload: nodeId
+  });
+  dispatch({ type: STOP_LOADING_UI });
+};
+
+
+

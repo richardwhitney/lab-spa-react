@@ -32,7 +32,7 @@ class Home extends Component{
           </Grid.Column>
           <Grid.Column>
             <Segment as={Link}
-                     to={'/clinicalPathways'}
+                     to={'/clinicalPathwaysHub'}
                      inverted color='yellow'
                      padded style={{marginTop: '1em'}}
                      size='massive'

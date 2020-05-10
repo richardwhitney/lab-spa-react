@@ -58,13 +58,11 @@ class QuizDetail extends Component {
 
     let quizData = !loading && questions ? (
       <Segment raised clearing style={{ marginTop: '7em'}}>
-        {console.log("Finished loading")}
         <Segment stacked>
           <Header as='h3'>{title}</Header>
           <p>{description}</p>
           {showFinished ? (
           <Segment>
-            {console.log("Quiz finished")}
             <p>Your results are out. You scored {score} out of {questions.length}</p>
           </Segment>
           ) : (
@@ -83,7 +81,6 @@ class QuizDetail extends Component {
             </Fragment>
           ) : (
             <Segment>
-              {console.log("Here")}
               Question {currentIndex + 1} of {questions.length}
             </Segment>
           )}

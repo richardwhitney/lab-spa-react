@@ -8,7 +8,7 @@ import EditNewsItem from "./EditNewsItem";
 
 class NewsItem extends Component {
   render() {
-    dayjs.extend(relativeTime)
+    dayjs.extend(relativeTime);
     const {newsItem: {title, body, author, createdAt, newsItemId}, admin} = this.props;
     return (
       <Card fluid>

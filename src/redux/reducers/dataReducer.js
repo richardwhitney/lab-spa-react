@@ -21,7 +21,7 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT
+  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT, SET_CLINICAL_PATHWAYS, SET_CLINICAL_PATHWAY, SET_NODE
 } from "../types";
 
 const initialState = {
@@ -37,6 +37,9 @@ const initialState = {
   markdown: {},
   newsItems: [],
   newsItem: {},
+  clinicalPathways: [],
+  clinicalPathway: {},
+  currentNode: {},
   loading: false
 };
 
@@ -216,6 +219,26 @@ export default function (state = initialState, action) {
           action.payload,
           ...state.newsItems.slice(editItemIndex + 1)
         ]
+      };
+    case SET_CLINICAL_PATHWAYS:
+      return {
+        ...state,
+        clinicalPathways: action.payload,
+        loading: false
+      };
+    case SET_CLINICAL_PATHWAY:
+      return {
+        ...state,
+        clinicalPathway: action.payload,
+        currentNode: action.payload.nodes[0],
+        loading: false
+      };
+    case SET_NODE:
+      let nodeIndex = state.clinicalPathway.nodes.findIndex(node => node.id === action.payload);
+      return {
+        ...state,
+        currentNode: state.clinicalPathway.nodes[nodeIndex],
+        loading: false
       };
     default:
       return state;

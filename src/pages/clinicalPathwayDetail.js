@@ -22,7 +22,7 @@ class ClinicalPathwayDetail extends Component {
           <p>{description}</p>
         </Segment>
         <Container>
-          <Segment>
+          <Segment clearing>
             <Node/>
           </Segment>
         </Container>

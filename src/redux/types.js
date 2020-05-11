@@ -45,5 +45,6 @@ export const EDIT_NEWS_ITEM = 'EDIT_NEWS_ITEM';
 // Clinical pathways
 export const SET_CLINICAL_PATHWAYS = 'SET_CLINICAL_PATHWAYS';
 export const SET_CLINICAL_PATHWAY = 'SET_CLINICAL_PATHWAY';
-export const SET_NODE = 'SET_NODE';
+export const ADD_NODE = 'ADD_NODE';
+export const DELETE_NODE = 'DELETE_NODE';
 

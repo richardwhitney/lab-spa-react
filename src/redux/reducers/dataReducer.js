@@ -21,7 +21,14 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT, SET_CLINICAL_PATHWAYS, SET_CLINICAL_PATHWAY, SET_NODE
+  DELETE_NEWS_ITEM,
+  EDIT_NEWS_ITEM,
+  EDIT_CONTACT,
+  SET_CLINICAL_PATHWAYS,
+  SET_CLINICAL_PATHWAY,
+  SET_NODE,
+  ADD_NODE,
+  DELETE_NODE
 } from "../types";
 
 const initialState = {
@@ -39,6 +46,7 @@ const initialState = {
   newsItem: {},
   clinicalPathways: [],
   clinicalPathway: {},
+  currentNodes: [],
   currentNode: {},
   loading: false
 };
@@ -230,15 +238,28 @@ export default function (state = initialState, action) {
       return {
         ...state,
         clinicalPathway: action.payload,
-        currentNode: action.payload.nodes[0],
+        currentNodes: [
+          ...state.currentNodes,
+          action.payload.nodes[0]
+        ],
         loading: false
       };
-    case SET_NODE:
-      let nodeIndex = state.clinicalPathway.nodes.findIndex(node => node.id === action.payload);
+    case ADD_NODE:
+      let addNodeIndex = state.clinicalPathway.nodes.findIndex(node => node.id === action.payload);
       return {
         ...state,
-        currentNode: state.clinicalPathway.nodes[nodeIndex],
-        loading: false
+        currentNodes: [
+          ...state.currentNodes,
+          state.clinicalPathway.nodes[addNodeIndex]
+        ]
+      };
+    case DELETE_NODE:
+      state.currentNodes.pop();
+      return {
+        ...state,
+        currentNodes: [
+          ...state.currentNodes
+        ]
       };
     default:
       return state;

@@ -2,20 +2,28 @@ import React, {Component} from "react";
 import { Button, Header, Container} from "semantic-ui-react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getNode} from "../redux/actions/dataActions";
+import { addNode, deleteNode } from "../redux/actions/dataActions";
 
 class Node extends Component {
 
   onNodeButtonClick = (id) => {
-    console.log(`Node id: ${id}`);
-    this.props.getNode(id);
+    this.props.addNode(id);
+  };
+
+  onBackButtonClicked = () => {
+    this.props.deleteNode();
   };
 
   render() {
-    const {currentNode: {description, options}} = this.props;
+    const {currentNodes} = this.props.data;
+    const currentNode = currentNodes[currentNodes.length - 1];
+    const {description, options} = currentNode;
     return (
       <Container>
-        <Header as='h4'>{description}</Header>
+        <div>
+          <Header as='h4'>{description}</Header>
+          {currentNodes.length > 1 && <Button floated='right' onClick={() => this.onBackButtonClicked()}>Back</Button> }
+        </div>
         {options && options.map((option, index) => {
           return (
             <Button key={index} onClick={() => this.onNodeButtonClick(option.id)}>
@@ -29,12 +37,13 @@ class Node extends Component {
 }
 
 Node.propTypes = {
-  getNode: PropTypes.func.isRequired,
-  currentNode: PropTypes.object.isRequired
+  addNode: PropTypes.func.isRequired,
+  deleteNode: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  currentNode: state.data.currentNode
+  data: state.data
 });
 
-export default connect(mapStateToProps, {getNode})(Node);
+export default connect(mapStateToProps, { addNode, deleteNode })(Node);

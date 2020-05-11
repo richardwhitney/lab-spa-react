@@ -25,7 +25,14 @@ import {
   SET_NEWS_ITEMS,
   ADD_NEWS_ITEM,
   SET_NEWS_ITEM,
-  DELETE_NEWS_ITEM, EDIT_NEWS_ITEM, EDIT_CONTACT, SET_CLINICAL_PATHWAYS, SET_CLINICAL_PATHWAY, SET_NODE
+  DELETE_NEWS_ITEM,
+  EDIT_NEWS_ITEM,
+  EDIT_CONTACT,
+  SET_CLINICAL_PATHWAYS,
+  SET_CLINICAL_PATHWAY,
+  SET_NODE,
+  ADD_NODE,
+  DELETE_NODE
 } from '../types';
 import axios from 'axios';
 
@@ -448,14 +455,17 @@ export const getClinicalPathway = (clinicalPathwayId) => dispatch => {
     .catch(error => console.log(error));
 };
 
-export const getNode = (nodeId) => dispatch => {
-  dispatch({type: LOADING_UI});
+export const addNode = (nodeId) => dispatch => {
   dispatch({
-    type: SET_NODE,
+    type: ADD_NODE,
     payload: nodeId
   });
-  dispatch({ type: STOP_LOADING_UI });
 };
+
+export const deleteNode = () => dispatch => {
+  dispatch({ type: DELETE_NODE});
+};
+
 
 
 

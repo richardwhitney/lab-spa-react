@@ -99,6 +99,7 @@ class EditBloodProduct extends Component {
             <Form.Input label='General Description'
                         control={TextArea}
                         placeholder='Description'
+                        name='description'
                         value={this.state.description}
                         onChange={this.handleChange}
                         error={!!errors.description}
@@ -115,6 +116,7 @@ class EditBloodProduct extends Component {
             <Form.Input label='Storage Temperature'
                         placeholder='Storage temperature'
                         value={this.state.storageTemp}
+                        name='storageTemp'
                         onChange={this.handleChange}
                         error={!!errors.storageTemp}
             />

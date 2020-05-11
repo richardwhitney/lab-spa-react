@@ -84,6 +84,7 @@ class EditNewsItem extends Component {
             <Form.Input label='Body'
                         control={TextArea}
                         placeholder='Body...'
+                        name='body'
                         value={this.state.body}
                         onChange={this.handleChange}
                         error={!!errors.body}

@@ -86,6 +86,7 @@ class EditContact extends Component {
             {errors.name && <Label pointing color='red'>{errors.name}</Label>}
             <Form.Input label='Phone Number'
                         placeholder='Phone number'
+                        name='phone'
                         value={this.state.phone}
                         onChange={this.handleChange}
                         error={!!errors.phone}
@@ -93,6 +94,7 @@ class EditContact extends Component {
             {errors.phone && <Label pointing color='red'>{errors.phone}</Label>}
             <Form.Input label='Department'
                         placeholder='Department'
+                        name='department'
                         value={this.state.department}
                         onChange={this.handleChange}
                         error={!!errors.department}

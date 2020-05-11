@@ -121,6 +121,7 @@ class EditTest extends Component {
                 onSubmit={this.handleSubmit}>
             <Form.Input fluid
                         placeholder='Test name'
+                        label='Name'
                         name='name'
                         value={this.state.name}
                         onChange={this.handleChange}
@@ -139,6 +140,7 @@ class EditTest extends Component {
             />
             {errors.department && <Label pointing color='red'>{errors.department}</Label>}
             <Form.Input fluid
+                        label='Request Form'
                         placeholder='Request form'
                         name='requestForm'
                         value={this.state.requestForm}
@@ -147,6 +149,7 @@ class EditTest extends Component {
             />
             {errors.requestForm && <Label pointing color='red'>{errors.requestForm}</Label>}
             <Form.Input fluid
+                        label='Specimen Type'
                         placeholder='Specimen type'
                         name='specimenType'
                         value={this.state.specimenType}
@@ -155,20 +158,23 @@ class EditTest extends Component {
             />
             {errors.specimenType && <Label pointing color='red'>{errors.specimenType}</Label>}
             <Form.Input fluid
+                        label='Specimen Volume'
                         placeholder='Specimen volume'
-                        name='specimenType'
+                        name='specimenVolume'
                         value={this.state.specimenVolume}
                         onChange={this.handleChange}
                         error={!!errors.specimenVolume}
             />
             {errors.specimenVolume && <Label pointing color='red'>{errors.specimenVolume}</Label>}
             <Form.Input fluid
+                        label='Specimen Requirements'
                         placeholder='Specimen Requirements'
                         name='specimenRequirements'
                         value={this.state.specimenRequirements}
                         onChange={this.handleChange}
             />
             <Form.Input fluid
+                        label='Turnaround Time'
                         placeholder='Turnaround time'
                         name='turnaroundTime'
                         value={this.state.turnaroundTime}
@@ -177,12 +183,14 @@ class EditTest extends Component {
             />
             {errors.turnaroundTime && <Label pointing color='red'>{errors.turnaroundTime}</Label>}
             <Form.Input fluid
+                        label='Phone Alert Limits'
                         placeholder='Phone alert limits'
                         name='phoneAlertLimits'
                         value={this.state.phoneAlertLimits}
                         onChange={this.handleChange}
             />
             <Form.Input control={TextArea}
+                        label='Special Notes'
                         placeholder='Special notes'
                         name='specialNotes'
                         value={this.state.specialNotes}

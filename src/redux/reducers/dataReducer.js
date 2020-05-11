@@ -239,7 +239,6 @@ export default function (state = initialState, action) {
         ...state,
         clinicalPathway: action.payload,
         currentNodes: [
-          ...state.currentNodes,
           action.payload.nodes[0]
         ],
         loading: false

@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { Button, Header, Container} from "semantic-ui-react";
+import React, {Component, Fragment} from "react";
+import {Button, Header, Container, Divider} from "semantic-ui-react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addNode, deleteNode } from "../redux/actions/dataActions";
@@ -19,18 +19,28 @@ class Node extends Component {
     const currentNode = currentNodes[currentNodes.length - 1];
     const {description, options} = currentNode;
     return (
-      <Container>
+      <Container textAlign='center'>
         <div>
           <Header as='h4'>{description}</Header>
-          {currentNodes.length > 1 && <Button floated='right' onClick={() => this.onBackButtonClicked()}>Back</Button> }
         </div>
-        {options && options.map((option, index) => {
-          return (
-            <Button key={index} onClick={() => this.onNodeButtonClick(option.id)}>
-              {option.label}
-            </Button>
+        <Divider horizontal/>
+        <Container textAlign='center'>
+          {options && options.map((option, index) => {
+            return (
+              <Button key={index} size='large' onClick={() => this.onNodeButtonClick(option.id)}>
+                {option.label.split('\\n').map((text, index) => {
+                  return (
+                    <Fragment key={index}>
+                      {text}
+                      <br/>
+                    </Fragment>
+                    )
+                })}
+              </Button>
             )
-        })}
+          })}
+        </Container>
+        {currentNodes.length > 1 && <Button floated='right' onClick={() => this.onBackButtonClicked()}>Back</Button> }
       </Container>
     )
   }

@@ -1,7 +1,7 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Form, Button, Label, Container, Modal, MenuItem} from "semantic-ui-react";
+import {Form, Button, Label, Container, Modal, MenuItem, Icon} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 import {addContact, clearErrors} from "../redux/actions/dataActions";
@@ -66,7 +66,7 @@ class AddContact extends Component {
     const {errors} = this.state;
     return (
       <Modal
-        trigger={<MenuItem onClick={this.handleOpen}>Add</MenuItem>}
+        trigger={<MenuItem onClick={this.handleOpen}><Icon name='plus'/>Add</MenuItem>}
         open={this.state.open}
         onClose={this.handleClose}
         >

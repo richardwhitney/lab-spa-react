@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import {Link, withRouter} from "react-router-dom";
-import {Menu} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 // Redux
 import {connect} from 'react-redux';
 
@@ -14,6 +14,7 @@ class MarkdownMenuItems extends Component {
         <Menu.Menu position='left'>
           <Link to='/home'>
             <Menu.Item name='home'>
+              <Icon name='chevron left'/>
               Home
             </Menu.Item>
           </Link>

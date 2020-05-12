@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Header} from "semantic-ui-react";
+import {Modal, Button, Header, Icon} from "semantic-ui-react";
 
 import { connect } from 'react-redux';
 import { deleteContact } from "../redux/actions/dataActions";
@@ -27,7 +27,7 @@ class DeleteContact extends Component{
   render() {
     return (
       <Modal
-        trigger={<Button color='red' onClick={this.handleOpen} floated='right'>Delete</Button>}
+        trigger={<Button color='red' onClick={this.handleOpen} floated='right'><Icon name='trash'/>Delete</Button>}
         open={this.state.open}
         onClose={this.handleClose}
       >

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Menu} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 import {withRouter} from "react-router-dom";
 
 // Redux
@@ -17,6 +17,7 @@ class HomeMenuItems extends Component {
     return (
       <Menu.Menu position="right">
         <Menu.Item name="Logout" onClick={this.handleLogout}>
+          <Icon name='log out'/>
           Logout
         </Menu.Item>
       </Menu.Menu>

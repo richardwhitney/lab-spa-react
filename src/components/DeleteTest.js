@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, MenuItem, Header} from "semantic-ui-react";
+import {Modal, Button, MenuItem, Header, Icon} from "semantic-ui-react";
 import { withRouter} from "react-router-dom";
 
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ class DeleteTest extends Component{
   render() {
     return (
       <Modal
-        trigger={<MenuItem onClick={this.handleOpen}>Delete</MenuItem>}
+        trigger={<MenuItem onClick={this.handleOpen}><Icon name='trash'/>Delete</MenuItem>}
         open={this.state.open}
         onClose={this.handleClose}
         >

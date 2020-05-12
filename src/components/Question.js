@@ -33,18 +33,19 @@ class Question extends  Component {
     return (
       <Fragment>
         <Segment>
-          {answered && <Button color='blue' size='large' onClick={this.resetQuestion}>Next</Button> }
+          {answered && <Button color='blue' size='large' floated='right' onClick={this.resetQuestion}>Next</Button> }
           <Header as='h3'>{question.question}</Header>
         </Segment>
         <Container>
-          <Grid columns={1}>
-
+          <Grid>
             {question.options.map((option, index) => {
               return (
                 <Grid.Row key={index}>
                   <Button
+                    fluid
                     key={index}
                     onClick={() => this.onOptionClicked(option)}
+                    disabled={answered}
                     color={`${answered && this.isCorrect(option) && "green"}
                     ${this.state.selectedOption === option && !this.isCorrect(option) && "red"}`}
                   >
@@ -53,9 +54,7 @@ class Question extends  Component {
                 </Grid.Row>
               )
             })}
-
           </Grid>
-
         </Container>
       </Fragment>
     )

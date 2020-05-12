@@ -1,7 +1,7 @@
 // React
 import React, {Component} from "react";
 // Semantic-UI
-import {Modal, MenuItem} from "semantic-ui-react";
+import {Modal, MenuItem, Icon} from "semantic-ui-react";
 import AddQuizMainForm from "./AddQuizMainForm";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -33,7 +33,7 @@ class AddQuizModal extends Component {
   render() {
     return (
       <Modal
-        trigger={<MenuItem onClick={this.handleOpen}>Add</MenuItem> }
+        trigger={<MenuItem onClick={this.handleOpen}><Icon name='plus'/>Add</MenuItem> }
         open={this.state.open}
         onClose={this.handleClose}
         >

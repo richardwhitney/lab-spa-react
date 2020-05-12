@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Menu } from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 
 // Redux
 import {connect} from "react-redux";
@@ -27,6 +27,7 @@ class TestHubMenuItems extends Component {
         <Menu.Menu position='left'>
           <Link to='/testhub'>
             <Menu.Item name='testhub'>
+              <Icon name='chevron left'/>
               Test Hub
             </Menu.Item>
           </Link>

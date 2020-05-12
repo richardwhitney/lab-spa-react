@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Link, withRouter} from "react-router-dom";
-import {Menu} from "semantic-ui-react";
+import {Icon, Menu} from "semantic-ui-react";
 
 class DefaultMenuItems extends Component {
 
@@ -9,6 +9,7 @@ class DefaultMenuItems extends Component {
       <Menu.Menu position='left'>
         <Link to='/home'>
           <Menu.Item name='home'>
+            <Icon name='chevron left'/>
             Home
           </Menu.Item>
         </Link>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Select, Input, Segment, Dropdown} from "semantic-ui-react";
+import {Select, Input, Segment} from "semantic-ui-react";
 
 const departments = [
   { key: '00', value: 'All', text: 'All' },
@@ -27,7 +27,6 @@ class FilterControls extends Component {
 
   handleDepartmentChange = (event, result) => {
     const { value } = result;
-    console.log(`Select change ${value}`);
     this.handleChange(event, 'department', value);
   };
 
@@ -40,7 +39,7 @@ class FilterControls extends Component {
                name='name'
                onChange={this.handleTextChange}
         />
-        <Dropdown label="Department"
+        <Select label="Department"
                control={Select}
                selection
                options={departments}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Modal, Form, Container, MenuItem, Label, TextArea, Select} from 'semantic-ui-react'
+import {Button, Modal, Form, Container, MenuItem, Label, TextArea, Select, Icon} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -110,7 +110,7 @@ class EditTest extends Component {
     const {errors} = this.state;
     return (
       <Modal
-        trigger={<MenuItem onClick={this.handleOpen}>Edit</MenuItem> }
+        trigger={<MenuItem onClick={this.handleOpen}><Icon name='edit'/>Edit</MenuItem> }
         open={this.state.open}
         onClose={this.handleClose}
       >

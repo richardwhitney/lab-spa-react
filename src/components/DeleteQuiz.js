@@ -3,10 +3,10 @@ import {Modal, Button, MenuItem, Header, Icon} from "semantic-ui-react";
 import { withRouter} from "react-router-dom";
 
 import { connect } from 'react-redux';
-import { deleteBloodProduct } from "../redux/actions/dataActions";
+import { deleteQuiz } from "../redux/actions/dataActions";
 import PropTypes from 'prop-types';
 
-class DeleteBloodProduct extends Component {
+class DeleteQuiz extends Component {
 
   state = {
     open: false
@@ -20,9 +20,10 @@ class DeleteBloodProduct extends Component {
     this.setState({ open: false });
   };
 
-  deleteBloodProduct = () => {
-    this.props.deleteBloodProduct(this.props.productId, this.props.history);
-    this.setState({ open: false });
+  deleteQuiz = () => {
+    console.log(`Quiz id delete: ${this.props.quizId}`);
+    this.props.deleteQuiz(this.props.quizId, this.props.history);
+    this.setState({open: false });
   };
 
   render() {
@@ -31,22 +32,22 @@ class DeleteBloodProduct extends Component {
         trigger={<MenuItem onClick={this.handleOpen}><Icon name='trash'/>Delete</MenuItem>}
         open={this.state.open}
         onClose={this.handleClose}
-        >
-        <Header content='Delete Blood Product'/>
+      >
+        <Header content='Delete Quiz'/>
         <Modal.Content>
-          <p>Are you sure you want to delete this blood product</p>
+          <p>Are you sure you want to delete this quiz</p>
         </Modal.Content>
         <Modal.Actions>
           <Button color='blue' onClick={this.handleClose}>Cancel</Button>
-          <Button color='red' onClick={this.deleteBloodProduct}>Delete</Button>
+          <Button color='red' onClick={this.deleteQuiz}>Delete</Button>
         </Modal.Actions>
       </Modal>
     )
   }
 }
 
-DeleteBloodProduct.propTypes = {
-  deleteBloodProduct: PropTypes.func.isRequired
+DeleteQuiz.propTypes = {
+  deleteQuiz: PropTypes.func.isRequired
 };
 
-export default withRouter(connect(null, {deleteBloodProduct})(DeleteBloodProduct));
+export default withRouter(connect(null, {deleteQuiz})(DeleteQuiz));

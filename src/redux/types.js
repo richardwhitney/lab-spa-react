@@ -23,6 +23,7 @@ export const SET_QUIZ = 'SET_QUIZ';
 export const SET_QUIZ_RESULTS = 'SET_QUIZ_RESULTS';
 export const ADD_QUIZ_RESULT = 'ADD_QUIZ_RESULT';
 export const ADD_QUIZ = 'ADD_QUIZ';
+export const DELETE_QUIZ = 'DELETE_QUIZ';
 // Blood products
 export const SET_BLOOD_PRODUCTS = 'SET_BLOOD_PRODUCTS';
 export const SET_BLOOD_PRODUCT = 'SET_BLOOD_PRODUCT';

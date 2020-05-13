@@ -32,7 +32,7 @@ import {
   SET_CLINICAL_PATHWAY,
   SET_NODE,
   ADD_NODE,
-  DELETE_NODE
+  DELETE_NODE, DELETE_QUIZ
 } from '../types';
 import axios from 'axios';
 
@@ -182,6 +182,17 @@ export const addQuiz = (newQuiz) => (dispatch) => {
         payload: error.response.data
       });
     });
+};
+
+export const deleteQuiz = (quizId, history) => (dispatch) => {
+  dispatch({type: LOADING_UI});
+  axios.delete(`/quiz/${quizId}`)
+    .then(() => {
+      dispatch({type: DELETE_QUIZ, payload: quizId});
+      dispatch({type: STOP_LOADING_UI});
+      history.push('/quizhub');
+    })
+    .catch(error => console.log(error));
 };
 
 export const getBloodProducts = () => dispatch => {

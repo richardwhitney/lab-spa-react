@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Modal, Form, Container, Label, Icon, TextArea} from 'semantic-ui-react'
+import {Button, Modal, Form, Container, Label, Popup, TextArea} from 'semantic-ui-react'
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -64,7 +64,7 @@ class EditNewsItem extends Component {
     const {errors} = this.state;
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen}><Icon name='edit'/></Button>}
+        trigger={<Popup content='Edit news item' trigger={<Button icon='edit' onClick={this.handleOpen}/>}/>}
         open={this.state.open}
         onClose={this.handleClose}
         >

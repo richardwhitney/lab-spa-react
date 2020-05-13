@@ -9,6 +9,7 @@ import {
   SET_QUIZ_RESULTS,
   ADD_QUIZ_RESULT,
   ADD_QUIZ,
+  DELETE_QUIZ,
   SET_BLOOD_PRODUCTS,
   ADD_BLOOD_PRODUCT,
   SET_BLOOD_PRODUCT,
@@ -26,7 +27,6 @@ import {
   EDIT_CONTACT,
   SET_CLINICAL_PATHWAYS,
   SET_CLINICAL_PATHWAY,
-  SET_NODE,
   ADD_NODE,
   DELETE_NODE
 } from "../types";
@@ -117,6 +117,12 @@ export default function (state = initialState, action) {
           action.payload,
           ...state.quizzes
         ]
+      };
+    case DELETE_QUIZ:
+      let quizIndex = state.quizzes.findIndex(quiz => quiz.quizId === action.payload);
+      state.quizzes.splice(quizIndex, 1);
+      return {
+        ...state
       };
     case SET_BLOOD_PRODUCTS:
       return {

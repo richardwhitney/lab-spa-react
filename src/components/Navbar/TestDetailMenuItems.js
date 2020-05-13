@@ -10,16 +10,6 @@ import DeleteTest from "../DeleteTest";
 
 class TestHubMenuItems extends Component {
 
-  componentDidMount() {
-    console.log("State test id " + this.props.test.testId);
-  };
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.test !== this.props.test) {
-      console.log('Test state changed ' + this.props.test.testId);
-    }
-  }
-
   render() {
     const { admin, test: { testId } } = this.props;
     return (

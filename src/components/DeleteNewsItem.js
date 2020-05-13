@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Modal, Button, Header, Icon} from "semantic-ui-react";
+import {Modal, Button, Header, Icon, Popup} from "semantic-ui-react";
 
 import { connect } from 'react-redux';
 import { deleteNewsItem } from "../redux/actions/dataActions";
@@ -26,7 +26,7 @@ class DeleteNewsItem extends Component {
   render() {
     return (
       <Modal
-        trigger={<Button icon onClick={this.handleOpen}><Icon name='trash'/></Button>}
+        trigger={<Popup content='Delete news item' trigger={ <Button icon='trash' onClick={this.handleOpen}/>}/>}
         open={this.state.open}
         onClose={this.handleClose}
         >

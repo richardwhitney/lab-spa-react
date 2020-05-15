@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import {Icon, Menu} from "semantic-ui-react";
 import {connect} from "react-redux";
 import DeleteQuiz from "../DeleteQuiz";
+import EditQuizModal from "../EditQuiz/EditQuizModal";
 
 class QuizDetailMenuItems extends Component {
 
@@ -21,6 +22,7 @@ class QuizDetailMenuItems extends Component {
         {admin && (
           <Menu.Menu position='right'>
             <DeleteQuiz quizId={quizId}/>
+            <EditQuizModal/>
           </Menu.Menu>
         )}
       </Fragment>

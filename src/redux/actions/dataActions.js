@@ -133,7 +133,16 @@ export const getQuiz = (quizId) => dispatch => {
       });
       dispatch({ type: STOP_LOADING_UI });
     })
-    .catch(error => console.log());
+    .catch(error => console.log(error));
+};
+
+export const editQuiz = (updatedQuiz, quizId) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios.put(`quiz/${quizId}`, updatedQuiz)
+    .then(() => {
+      dispatch(getQuiz(quizId));
+    })
+    .catch(error => console.log(error));
 };
 
 export const getQuizResults = () => dispatch => {

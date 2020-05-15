@@ -50,10 +50,22 @@ class EditQuizMainForm extends Component {
 
   nextQuestion = () => {
     const { questionIndex } = this.state;
-    this.setState({
-      question: this.state.questions
-    })
-  }
+    const { questions } = this.state.quiz;
+    if (questionIndex < questions.length - 1) {
+      this.setState({
+        questionIndex: questionIndex + 1
+      });
+    }
+  };
+
+  prevQuestion = () => {
+    const { questionIndex } = this.state;
+    if (questionIndex >= 1) {
+      this.setState({
+        questionIndex: questionIndex - 1
+      });
+    }
+  };
 
   addQuestion = () => {
     const newQuestion = { question: this.state.question, answer: this.state.answer, options: this.state.options };
@@ -63,6 +75,48 @@ class EditQuizMainForm extends Component {
     this.setState({ question: '', answer: '', options: [""] });
   };
 
+  addOption = () => {
+    const {questionIndex} = this.state;
+    this.setState((prevState) => {
+      let temp = {
+        ...prevState,
+        quiz: {...prevState.quiz}
+      };
+      console.log(temp);
+      temp.quiz.questions[questionIndex].options.push("");
+      console.log(temp);
+      return temp;
+    })
+  };
+
+  deleteOption = () => {
+    const {questionIndex} = this.state;
+    this.setState((prevState) => {
+      let temp = {
+        ...prevState,
+        quiz: {...prevState.quiz}
+      };
+      if (temp.quiz.questions[questionIndex].options.length > 1)
+        temp.quiz.questions[questionIndex].options.pop();
+      return temp;
+    })
+  };
+
+  handleQuestionOptionChange = (e) => {
+    const { questionIndex } = this.state;
+    const name = e.target.name;
+    const value = e.target.value;
+
+    const optionIndex = name.split('-')[1];
+    this.setState((prevState) => {
+      let temp = {
+        ...prevState,
+        quiz: {...prevState.quiz}
+      };
+      temp.quiz.questions[questionIndex].options[optionIndex] = value;
+      return temp;
+    })
+  };
 
   handleQuestionNameAnswerChange = (e) => {
     const { questionIndex } = this.state;
@@ -83,27 +137,7 @@ class EditQuizMainForm extends Component {
 
   handleChange = (e) => {
     const { questionIndex } = this.state;
-    if (e.target.name.includes("question") || (e.target.name.includes("answer"))) {
-      //console.log("Q&A");
-      /*const question = { ...this.state.quiz.questions[questionIndex], [e.target.name]: e.target.value };
-      const q = this.state.quiz.questions[questionIndex].map((x, index) => {
-
-      const quiz = { ...this.state.quiz};
-      console.log(`Quiz: ${JSON.stringify(quiz)}`);
-      this.setState(state => {
-        const questions = state.quiz.questions.map((q, i) => {
-          if (i === questionIndex) {
-            return question;
-          } else {
-            return q;
-          }
-        });
-        return {
-          questions,
-        };
-      });*/
-    }
-    else if (e.target.name.includes("option")) {
+    if (e.target.name.includes("option")) {
       let index = e.target.name.split('-')[1];
       let options = [...this.state.quiz.questions[questionIndex].options];
       options[index] = e.target.value;
@@ -113,12 +147,6 @@ class EditQuizMainForm extends Component {
       const quiz = { ...this.state.quiz, [e.target.name]: e.target.value };
       this.setState(() => ({ quiz }));
     }
-  };
-
-  addOption = () => {
-    this.setState((prevState) => ({
-      options: [...prevState.options, ""]
-    }));
   };
 
   addQuiz = () => {
@@ -142,17 +170,16 @@ class EditQuizMainForm extends Component {
                                  handleChange={this.handleChange}
                                  values={quizValues}/>;
       case 2:
-        //const q = questions[questionIndex];
-        //const o = q.options;
-        //const answer = q.answer;
-        //const question = q.question;
-        //const questionValues = { question, answer };
         return <EditQuizQuestionForm nextStep={this.nextStep}
                                      prevStep={this.prevStep}
                                      handleNameAnswerChange={this.handleQuestionNameAnswerChange}
-                                     handleChange={this.handleChange}
+                                     handleOptionChange={this.handleQuestionOptionChange}
+                                     handleNextQuestion={this.nextQuestion}
+                                     handlePrevQuestion={this.prevQuestion}
                                      handleAddQuestion={this.addQuestion}
                                      handleAddOption={this.addOption}
+                                     handleDeleteOption={this.deleteOption}
+                                     questionIndex={questionIndex}
                                      question={question}/>;
       case 3:
         return null;

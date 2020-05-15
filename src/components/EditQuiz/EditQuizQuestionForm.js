@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Form, Button, Header, Icon } from 'semantic-ui-react';
+import {Form, Button, Header, Icon, Container} from 'semantic-ui-react';
 
 class EditQuizQuestionForm extends Component {
 
@@ -13,6 +13,14 @@ class EditQuizQuestionForm extends Component {
     this.props.prevStep();
   };
 
+  handlePrevQuestion = (e) => {
+    this.props.handlePrevQuestion();
+  };
+
+  handleNextQuestion = (e) => {
+    this.props.handleNextQuestion();
+  };
+
   handleAddQuestion = (e) => {
     this.props.handleAddQuestion();
   };
@@ -22,12 +30,21 @@ class EditQuizQuestionForm extends Component {
     this.props.handleAddOption();
   };
 
+  handleDeleteOption = (e) => {
+    e.preventDefault();
+    this.props.handleDeleteOption();
+  };
+
   render() {
     let { question, answer, options } = this.props.question;
     return (
       <Form>
         <Header as='h4'>Question Details</Header>
-        <Form.Input label='Question'
+        <Container>
+          <Button icon floated='left' onClick={this.handlePrevQuestion}><Icon name='chevron left'/></Button>
+          <Button icon floated='right' onClick={this.handleNextQuestion}><Icon name='chevron right'/></Button>
+        </Container>
+        <Form.Input label={`Question #${this.props.questionIndex + 1}`}
                     placeholder='Enter a question'
                     onChange={this.props.handleNameAnswerChange}
                     value={question}
@@ -41,13 +58,16 @@ class EditQuizQuestionForm extends Component {
                 <Form.Input label={`Option #${idx + 1}`}
                             name={optionId}
                             value={val}
-                            onChange={this.props.handleChange}
+                            onChange={this.props.handleOptionChange}
                 />
               </Fragment>
             )
           })
         }
-        <Button icon onClick={this.handleAddOption}><Icon name='plus'/></Button>
+        <Container>
+          <Button icon onClick={this.handleDeleteOption}><Icon name='minus'/></Button>
+          <Button icon onClick={this.handleAddOption}><Icon name='plus'/></Button>
+        </Container>
         <Form.Input label='Answer'
                     placeholder='Enter an answer'
                     onChange={this.props.handleNameAnswerChange}

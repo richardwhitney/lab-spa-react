@@ -56,7 +56,7 @@ class AddQuizQuestionFrom extends Component {
         />
         <Button onClick={this.back}>Back</Button>
         <Button onClick={this.handleAddQuestion}>Add Question</Button>
-        <Button onClick={this.saveAndContinue}>Save And Continue</Button>
+        <Button onClick={this.saveAndContinue}>Next</Button>
       </Form>
     );
   }

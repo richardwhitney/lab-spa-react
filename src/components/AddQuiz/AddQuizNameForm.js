@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Header } from 'semantic-ui-react';
+import {Form, Button, Header, TextArea} from 'semantic-ui-react';
 
 class AddQuizNameForm extends Component {
 
@@ -20,12 +20,13 @@ class AddQuizNameForm extends Component {
                     value={values.quizName}
         />
         <Form.Input label='Description'
+                    control={TextArea}
                     placeholder='Quiz description'
                     name='quizDescription'
                     onChange={this.props.handleChange}
                     value={values.quizDescription}
         />
-        <Button onClick={this.saveAndContinue}>Save And Continue</Button>
+        <Button onClick={this.saveAndContinue}>Next</Button>
       </Form>
     );
   }

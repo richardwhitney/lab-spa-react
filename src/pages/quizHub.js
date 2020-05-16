@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Card, Loader, Dimmer} from "semantic-ui-react";
+import {Card, Loader, Dimmer, Container} from "semantic-ui-react";
 
 import Quiz from "../components/Quiz";
 
@@ -25,9 +25,11 @@ class QuizHub extends Component {
       </Dimmer>
     );
     return (
-      <Card.Group centered style={{ marginTop: '7em'}}>
-        {quizList}
-      </Card.Group>
+      <Container style={{ marginTop: '7em'}}>
+        <Card.Group>
+          {quizList}
+        </Card.Group>
+      </Container>
     )
   }
 }

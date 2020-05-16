@@ -7,11 +7,13 @@ class Quiz extends Component {
     const { quiz: { title, description, quizId }} = this.props;
     return (
       <Card as={Link}
+            fluid
             to={`/quizzes/${quizId}`}
             header={title}
             description={description}
             color='green'
       />
+
     )
   }
 }

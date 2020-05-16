@@ -29,7 +29,7 @@ class AuthNavbar extends Component {
     else if (pathname.includes('/quizhub')) {
       return <QuizHubMenuItems/>
     }
-    else if (pathname.includes('/quizzes/') || pathname.includes('/quizresults')) {
+    else if (pathname.includes('/quizzes/')) {
       return <QuizDetailMenuItems/>
     }
     else if (pathname.includes('/bloodProductInformation')) {

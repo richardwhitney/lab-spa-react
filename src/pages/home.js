@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import {Grid, Segment, Popup} from "semantic-ui-react";
+import {Grid, Segment, Popup, Container, Icon, Header} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 class Home extends Component{
 
   render() {
     return (
-      <Grid columns={3}
+      <Grid columns={3} stackable
             padded style={{ marginTop: '7em', height: '100vh'}}
             textAlign='center'>
         <Grid.Row stretched>
@@ -18,7 +18,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Test Guide
+                <Container>
+                  <p>Test Guide</p>
+                  <Icon name='lab' size='huge'/>
+                </Container>
               </Segment>}
             />
 
@@ -31,7 +34,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Contacts
+                <Container>
+                  <p>Contacts</p>
+                  <Icon name='address book' size='huge'/>
+                </Container>
               </Segment>}
             />
 
@@ -44,7 +50,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Clinical Pathways
+                <p>Clinical Pathways</p>
+                <Container>
+                  <Icon name='sitemap' size='huge'/>
+                </Container>
               </Segment>
             }
             />
@@ -60,7 +69,11 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Haematology
+
+                <Container>
+                  <p>Haematology</p>
+                  <Icon name='tint' size='huge'/>
+                </Container>
               </Segment>
             }
             />
@@ -73,7 +86,11 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Biochemistry
+
+                <Container>
+                  <p>Biochemistry</p>
+                  <Icon name='thermometer half' size='huge'/>
+                </Container>
               </Segment>
             }
             />
@@ -86,7 +103,11 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Blood Transfusion
+                <Container>
+                  <p>Blood Transfusion</p>
+                  <Icon name='syringe' size='huge'/>
+                </Container>
+
               </Segment>
             }
             />
@@ -102,7 +123,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Blood Product Information
+                <Container>
+                  <p>Blood Product Information</p>
+                  <Icon name='eye dropper' size='huge'/>
+                </Container>
               </Segment>
             }
             />
@@ -115,7 +139,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                News Feed
+                <Container>
+                  <p>News</p>
+                  <Icon name='newspaper' size='huge'/>
+                </Container>
               </Segment>
             }
             />
@@ -128,7 +155,10 @@ class Home extends Component{
                        padded style={{marginTop: '1em'}}
                        size='massive'
               >
-                Quiz Hub
+                <Container>
+                  <p>Quiz Hub</p>
+                  <Icon name='book' size='huge'/>
+                </Container>
               </Segment>
             }
             />

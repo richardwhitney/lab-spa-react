@@ -75,8 +75,7 @@ class EditQuizQuestionForm extends Component {
                     name='answer'
         />
         <Button onClick={this.back}>Back</Button>
-        <Button onClick={this.handleAddQuestion}>Add Question</Button>
-        <Button onClick={this.saveAndContinue}>Save And Continue</Button>
+        <Button floated='right' onClick={this.saveAndContinue}>Next</Button>
       </Form>
     )
   }

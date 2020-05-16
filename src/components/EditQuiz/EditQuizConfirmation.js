@@ -6,7 +6,7 @@ class EditQuizConfirmation extends Component {
 
   saveAndContinue = (e) => {
     e.preventDefault();
-    this.props.handleAddQuiz();
+    this.props.handleUpdateQuiz();
   };
 
   back = (e) => {
@@ -68,7 +68,7 @@ class EditQuizConfirmation extends Component {
               })
             }
             <Button onClick={this.back}>Back</Button>
-            <Button onClick={this.saveAndContinue}>Confirm</Button>
+            <Button floated='right' onClick={this.saveAndContinue}>Confirm</Button>
           </List>
         </Segment>
       </Fragment>

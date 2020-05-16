@@ -5,6 +5,7 @@ import { editQuiz, clearErrors } from "../../redux/actions/dataActions";
 import PropTypes from 'prop-types';
 import EditQuizNameForm from "./EditQuizNameForm";
 import EditQuizQuestionForm from "./EditQuizQuestionForm";
+import EditQuizConfirmation from "./EditQuizConfirmation";
 
 class EditQuizMainForm extends Component {
 
@@ -65,14 +66,6 @@ class EditQuizMainForm extends Component {
         questionIndex: questionIndex - 1
       });
     }
-  };
-
-  addQuestion = () => {
-    const newQuestion = { question: this.state.question, answer: this.state.answer, options: this.state.options };
-    this.setState({
-      questions: [...this.state.questions, newQuestion]
-    });
-    this.setState({ question: '', answer: '', options: [""] });
   };
 
   addOption = () => {
@@ -149,13 +142,9 @@ class EditQuizMainForm extends Component {
     }
   };
 
-  addQuiz = () => {
+  updateQuiz = () => {
     this.props.clearErrors();
-    const updatedQuiz = {
-      quizName: this.state.quizName,
-      quizDescription: this.state.quizDescription,
-      questions: this.state.questions
-    };
+    const updatedQuiz = this.state.quiz;
     this.props.editQuiz(updatedQuiz, this.props.quiz.quizId);
   };
 
@@ -163,7 +152,6 @@ class EditQuizMainForm extends Component {
     const { step, quiz: {title, description, questions}, questionIndex } = this.state;
     const quizValues = { title, description };
     const question = questions[questionIndex];
-    const confirmationValues = { title, description, questions };
     switch (step) {
       case 1:
         return <EditQuizNameForm nextStep={this.nextStep}
@@ -176,13 +164,14 @@ class EditQuizMainForm extends Component {
                                      handleOptionChange={this.handleQuestionOptionChange}
                                      handleNextQuestion={this.nextQuestion}
                                      handlePrevQuestion={this.prevQuestion}
-                                     handleAddQuestion={this.addQuestion}
                                      handleAddOption={this.addOption}
                                      handleDeleteOption={this.deleteOption}
                                      questionIndex={questionIndex}
                                      question={question}/>;
       case 3:
-        return null;
+        return <EditQuizConfirmation prevStep={this.prevStep}
+                                     handleUpdateQuiz={this.updateQuiz}
+                                     quiz={this.state.quiz}/>;
       default:
         return null;
     }

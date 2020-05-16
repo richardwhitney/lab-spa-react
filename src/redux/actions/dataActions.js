@@ -138,6 +138,7 @@ export const getQuiz = (quizId) => dispatch => {
 
 export const editQuiz = (updatedQuiz, quizId) => (dispatch) => {
   dispatch({ type: LOADING_UI });
+  console.log(updatedQuiz);
   axios.put(`quiz/${quizId}`, updatedQuiz)
     .then(() => {
       dispatch(getQuiz(quizId));

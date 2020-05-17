@@ -13,7 +13,6 @@ class QuizDetail extends Component {
   state = {
     currentIndex: 0,
     score: 0,
-    showFinished: false,
     step: 1
   };
 
@@ -36,8 +35,8 @@ class QuizDetail extends Component {
   };
 
   renderSwitch = () => {
-    const { quiz: { title, description, questions }, UI: {loading}} = this.props;
-    const { currentIndex, showFinished, score, step } = this.state;
+    const { quiz: { title, description, videoUrl, questions } } = this.props;
+    const { currentIndex, score, step } = this.state;
     const currentQuestion = questions ? questions[currentIndex] : null;
     switch (step) {
       case 1:
@@ -47,16 +46,16 @@ class QuizDetail extends Component {
               <Header as='h3'>{title}</Header>
               <p>{description}</p>
             </Segment>
-            <Container>
+            {videoUrl && <Container>
               <div className='player-wrapper'>
                 <ReactPlayer
                   className='react-player'
-                  url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+                  url={videoUrl}
                   width='100%'
                   height='100%'
                 />
               </div>
-            </Container>
+            </Container>}
             <Segment clearing>
               <Button floated='right' onClick={this.nextStep} size='large' color='blue'>Next</Button>
             </Segment>
@@ -65,13 +64,11 @@ class QuizDetail extends Component {
       case 2:
         return (
           <Fragment>
-
-              <Question
-                onNextClicked={this.onNextClicked}
-                question={currentQuestion}
-                key={currentQuestion.id}
-              />
-
+            <Question
+              onNextClicked={this.onNextClicked}
+              question={currentQuestion}
+              key={currentQuestion.id}
+            />
             <Segment>
               Question {currentIndex + 1} of {questions.length}
             </Segment>
@@ -124,9 +121,7 @@ class QuizDetail extends Component {
   };
 
   render() {
-    const { quiz: { title, description, questions }, UI: {loading}} = this.props;
-    const { currentIndex, showFinished, score } = this.state;
-    const currentQuestion = questions ? questions[currentIndex] : null;
+    const { quiz: { questions }, UI: {loading}} = this.props;
 
     let quizData = !loading && questions ? (
       <Segment raised clearing style={{ marginTop: '7em'}}>

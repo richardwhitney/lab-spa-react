@@ -13,6 +13,7 @@ class AddQuizMainForm extends Component {
     step: 1,
     quizName: '',
     quizDescription: '',
+    videoUrl: '',
     question: '',
     answer: '',
     questions: [],
@@ -71,14 +72,15 @@ class AddQuizMainForm extends Component {
     const newQuiz = {
       quizName: this.state.quizName,
       quizDescription: this.state.quizDescription,
+      videoUrl: this.state.videoUrl,
       questions: this.state.questions
     };
     this.props.addQuiz(newQuiz);
   };
 
   render() {
-    const { step, quizName, quizDescription, question, answer, options, questions } = this.state;
-    const quizValues = { quizName, quizDescription};
+    const { step, quizName, quizDescription, videoUrl, question, answer, options, questions } = this.state;
+    const quizValues = { quizName, quizDescription, videoUrl };
     const questionValues = { question, answer };
     const confirmationValues = { quizName, quizDescription, questions };
     switch (step) {

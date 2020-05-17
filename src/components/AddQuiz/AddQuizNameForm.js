@@ -26,6 +26,12 @@ class AddQuizNameForm extends Component {
                     onChange={this.props.handleChange}
                     value={values.quizDescription}
         />
+        <Form.Input label='Video Link'
+                    placeholder='Leave empty if this quiz does not have a video'
+                    name='videoUrl'
+                    onChange={this.props.handleChange}
+                    value={values.videoUrl}
+        />
         <Button onClick={this.saveAndContinue}>Next</Button>
       </Form>
     );

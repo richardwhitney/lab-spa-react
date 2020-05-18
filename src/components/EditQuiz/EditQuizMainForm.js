@@ -15,6 +15,7 @@ class EditQuizMainForm extends Component {
     quiz: {
       title: '',
       description: '',
+      videoUrl: '',
       questions: [
         {
           question: '',
@@ -149,8 +150,8 @@ class EditQuizMainForm extends Component {
   };
 
   render() {
-    const { step, quiz: {title, description, questions}, questionIndex } = this.state;
-    const quizValues = { title, description };
+    const { step, quiz: {title, description, videoUrl ,questions}, questionIndex } = this.state;
+    const quizValues = { title, description, videoUrl };
     const question = questions[questionIndex];
     switch (step) {
       case 1:

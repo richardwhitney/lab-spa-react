@@ -23,7 +23,7 @@ class MarkdownMenuItems extends Component {
           <Menu.Menu position="right">
             <Link to='/editMarkdown'>
               <Menu.Item name='editMarkdown'>
-                Edit
+                <Icon name='edit'/>Edit
               </Menu.Item>
             </Link>
           </Menu.Menu>

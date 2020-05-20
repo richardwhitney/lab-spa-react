@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Card, Loader, Dimmer, Header} from "semantic-ui-react";
+import {Card, Loader, Dimmer, Header, Statistic, Container} from "semantic-ui-react";
 
 import {connect} from 'react-redux';
 import {getBloodProducts} from "../redux/actions/dataActions";
@@ -38,7 +38,12 @@ class BloodProductInformation extends Component{
     );
     return (
       <Fragment>
-        <Header as='h2' textAlign='center' style={{ marginTop: '7em'}}>{productList.length} Product(s)</Header>
+        <Container textAlign='center'>
+          <Statistic style={{ marginTop: '7em'}}>
+            <Statistic.Value>{productList.length}</Statistic.Value>
+            <Statistic.Label>Blood Product(s) Found</Statistic.Label>
+          </Statistic>
+        </Container>
         <BloodProductSearchBar onUserInput={this.handleChange}/>
         <Card.Group centered>
           {productList}

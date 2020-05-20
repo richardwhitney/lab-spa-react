@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Card, Loader, Dimmer, Header} from "semantic-ui-react";
+import {Card, Loader, Dimmer, Container, Statistic} from "semantic-ui-react";
 
 import Test from '../components/Test';
 
@@ -47,7 +47,13 @@ class TestHub extends Component{
     );
     return (
       <Fragment>
-        <Header as='h2' textAlign='center' style={{ marginTop: '7em'}}>{testList.length} Test(s)</Header>
+        <Container textAlign='center'>
+          <Statistic style={{ marginTop: '7em'}}>
+            <Statistic.Value>{testList.length}</Statistic.Value>
+            <Statistic.Label>Test(s) Found</Statistic.Label>
+          </Statistic>
+        </Container>
+
         <FilterControls onUserInput={this.handleChange}/>
         <Card.Group centered>
           {testList}

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Grid, Segment, Popup, Container, Icon, Header} from "semantic-ui-react";
+import {Grid, Segment, Popup, Container, Icon} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 
 class Home extends Component{

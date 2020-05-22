@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from "react";
-import {Button, Header, Container, Divider} from "semantic-ui-react";
+import {Button, Header, Container, Divider, CardGroup, Card} from "semantic-ui-react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addNode, deleteNode } from "../redux/actions/dataActions";
+import index from "react-player";
 
 class Node extends Component {
 
@@ -21,24 +22,21 @@ class Node extends Component {
     return (
       <Container textAlign='center'>
         <div>
-          <Header as='h4'>{description}</Header>
+          <Header as='h3'>{description}</Header>
         </div>
         <Divider horizontal/>
         <Container textAlign='center'>
-          {options && options.map((option, index) => {
-            return (
-              <Button key={index} size='large' onClick={() => this.onNodeButtonClick(option.id)}>
-                {option.label.split('\\n').map((text, index) => {
-                  return (
-                    <Fragment key={index}>
-                      {text}
-                      <br/>
-                    </Fragment>
-                    )
-                })}
-              </Button>
-            )
-          })}
+          {options && <CardGroup centered>
+            {options.map((option, index) => {
+              return (
+                <Card header={option.label}
+                      onClick={() => this.onNodeButtonClick(option.id)}
+                      color='green'
+                      key={index}
+                />
+              )
+            })}
+          </CardGroup> }
         </Container>
         {currentNodes.length > 1 && <Button floated='right' onClick={() => this.onBackButtonClicked()}>Back</Button> }
       </Container>

@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from "react";
-import {Button, Header, Container, Divider, CardGroup, Card} from "semantic-ui-react";
+import {Button, Header, Container, Divider, CardGroup, Card, Segment} from "semantic-ui-react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addNode, deleteNode } from "../redux/actions/dataActions";
-import index from "react-player";
 
 class Node extends Component {
 
@@ -22,7 +21,9 @@ class Node extends Component {
     return (
       <Container textAlign='center'>
         <div>
-          <Header as='h3'>{description}</Header>
+          <Segment size='large' raised>
+            <Header as='h2'>{description}</Header>
+          </Segment>
         </div>
         <Divider horizontal/>
         <Container textAlign='center'>

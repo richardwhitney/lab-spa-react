@@ -40,7 +40,7 @@ class ContactsTable extends Component {
           <Table.Row>
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Phone</Table.HeaderCell>
-            <Table.HeaderCell>Department</Table.HeaderCell>
+            <Table.HeaderCell>Title</Table.HeaderCell>
             {admin && (
               <Table.HeaderCell>Control</Table.HeaderCell>
             )}

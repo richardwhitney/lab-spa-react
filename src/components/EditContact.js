@@ -92,7 +92,7 @@ class EditContact extends Component {
                         error={!!errors.phone}
             />
             {errors.phone && <Label pointing color='red'>{errors.phone}</Label>}
-            <Form.Input label='Department'
+            <Form.Input label='Title'
                         placeholder='Department'
                         name='department'
                         value={this.state.department}

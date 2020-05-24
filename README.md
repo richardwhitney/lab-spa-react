@@ -1,7 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Hospital Laboratory Information and E-Learning Tool
+Name: Richard Whitney  
+### Overview
+This project was submitted as my final year project for the HDip in Computer Science in WIT.  
+  
+The goal of this project was to develop a web application for clinicians to provide assistance and information regarding hospital laboratory diagnostic services provided on site at St. Luke’s Hospital Kilkenny.  
+When a doctor graduates from college they are assigned to different hospitals around the country in order to complete a one-year internship. After six months they are assigned to another hospital to complete the final six months of their internship. This means that every six months St. Luke’s hospital receives a new batch of junior doctors that are unaware of the correct procedures to access the laboratory diagnostic services. This can lead to mistakes and delays in the processing of laboratory results.  
+The laboratory in SLGH (St. Luke’s General Hospital) is accredited to ISO 15189 and as part of the pre-analytical requirements of the standard, the laboratory must provide comprehensive information to all service users in the form of a handbook or a user manual. As well as meeting the requirements of ISO 15189 a comprehensive user manual can be a very useful resource for all the Non Consultant Hospital Doctors (NCHDs) as they rotate frequently between different hospitals.  
+Currently this is addressed by providing a link on the hospital intranet lab enquiry page. This link is to a PDF document which is over 60 pages. Although it addresses all the requirements of ISO 15189,  laboratory staff have expressed a desire to move to a new system.  
+The new system provides doctors with an application that is accessible through a web browser. The application allows doctors to find the information they need quickly and easily. The application allows laboratory management to update procedures, information, clinical pathways, and training modules to keep information up to date in accordance with best practises.  
+
+### Technologies
+React, Redux, Firebase, Cloud Functions  
 
 ## Available Scripts
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+  
 In the project directory, you can run:
 
 ### `yarn start`
@@ -12,63 +25,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
